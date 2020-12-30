@@ -4160,5 +4160,3 @@ bool IsZipHandleU(HZIP hz)
   TUnzipHandleData *han = (TUnzipHandleData*)hz;
   return (han->flag==1);
 }
-
-

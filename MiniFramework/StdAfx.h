@@ -14,21 +14,21 @@ using namespace DuiLib;
 
 #ifdef _DEBUG
 #   ifdef _UNICODE
-#       pragma comment(lib, "..\\lib\\DuiLib_d.lib")
-//#		pragma comment(lib, "..\\lib\\TroyControls_d.lib")
-#       pragma comment(lib, "..\\lib\\uWebSockets_d.lib")
+#       pragma comment(lib, "..\\Debug\\DuiLib.lib")
+//#		pragma comment(lib, "..\\Debug\\TroyControls.lib")
+#       pragma comment(lib, "..\\Debug\\uWebSockets.lib")
 #   else
-#       pragma comment(lib, "..\\lib\\DuiLibA_d.lib")
-#		pragma comment(lib, "..\\lib\\TroyControlsA_d.lib")
+#       pragma comment(lib, "..\\Debug\\DuiLibA.lib")
+#		pragma comment(lib, "..\\Debug\\TroyControlsA.lib")
 #   endif
 #else
 #   ifdef _UNICODE
-#       pragma comment(lib, "..\\lib\\DuiLib.lib")
-//#       pragma comment(lib, "..\\lib\\TroyControls.lib")
-//#       pragma comment(lib, "..\\lib\\uWebSockets.lib")
+#       pragma comment(lib, "..\\Release\\DuiLib.lib")
+//#       pragma comment(lib, "..\\Release\\TroyControls.lib")
+//#       pragma comment(lib, "..\\Release\\uWebSockets.lib")
 #   else
-#       pragma comment(lib, "..\\lib\\DuiLibA.lib")
-//#       pragma comment(lib, "..\\lib\\TroyControls.lib")
+#       pragma comment(lib, "..\\Release\\DuiLibA.lib")
+//#       pragma comment(lib, "..\\Release\\TroyControlsA.lib")
 #   endif
 #endif
 

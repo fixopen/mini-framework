@@ -3373,7 +3373,7 @@ namespace DuiLib {
 	void CPaintManagerUI::ReloadSharedImages()
 	{
 		TImageInfo* data;
-		TImageInfo* pNewData;
+		TImageInfo* pNewData = NULL;
 		for( int i = 0; i< m_SharedResInfo.m_ImageHash.GetSize(); i++ ) {
 			if(LPCTSTR bitmap = m_SharedResInfo.m_ImageHash.GetAt(i)) {
 				data = static_cast<TImageInfo*>(m_SharedResInfo.m_ImageHash.Find(bitmap));
@@ -3415,7 +3415,7 @@ namespace DuiLib {
 		RemoveAllDrawInfos();
 
 		TImageInfo* data;
-		TImageInfo* pNewData;
+		TImageInfo* pNewData = NULL;
 		for( int i = 0; i< m_ResInfo.m_ImageHash.GetSize(); i++ ) {
 			if(LPCTSTR bitmap = m_ResInfo.m_ImageHash.GetAt(i)) {
 				data = static_cast<TImageInfo*>(m_ResInfo.m_ImageHash.Find(bitmap));
@@ -4069,7 +4069,7 @@ namespace DuiLib {
 				LPBITMAPINFOHEADER  lpbi = (BITMAPINFOHEADER*)GlobalLock(medium.hGlobal);
 				if(lpbi != NULL)
 				{
-					HBITMAP hbm;
+					HBITMAP hbm = NULL;
 					HDC hdc = GetDC(NULL);
 					if(hdc != NULL)
 					{

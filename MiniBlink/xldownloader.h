@@ -5,7 +5,7 @@
 #include <thread>
 #include <atomic>
 #include <vector>
-#include"../3rd/ThunderOpenSDK/xldl.h"
+#include"../ThunderOpenSDK/xldl.h"
 #include "../Common/DllLoader.h"
 
 using namespace WisdomUtils;

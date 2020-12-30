@@ -4,7 +4,7 @@
 #include "Folders.h"
 #include "Log.h"
 
-#include "db/sqlite3.h"
+#include "../../SQLite/sqlite3.h"
 #include <assert.h>
 #include <algorithm>
 #include <iterator>

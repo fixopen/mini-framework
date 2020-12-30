@@ -16,6 +16,9 @@
     <Filter Include="utils">
       <UniqueIdentifier>{748e2237-5990-454f-b683-25dc0aa4146d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{b02c60f6-47e0-4814-a8c0-b74cf5ee438e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Readme.txt">
@@ -118,6 +121,15 @@
     </ClCompile>
     <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DownloadWnd.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\MiniControls.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\MsgWnd.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +234,15 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DownloadWnd.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MiniControls.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MsgWnd.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

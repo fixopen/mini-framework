@@ -1,6 +1,7 @@
 // MiniBlink.cpp : Defines the functions for the static library.
 //
 
+#include "StdAfx.h"
 #include "pch.h"
 #include "framework.h"
 

@@ -7,17 +7,19 @@
 #include <ShellAPI.h>
 #include <thread>
 
-#include "UI/DownloadWnd.h"
-#include "xldownloader.h"
-#include "Aria2cEngine.h"
-#include "MainWnd.h"
-#include "resource.h"
-#include "UI/MsgWnd.h"
-#include "UI/MiniControls.h"
-
 #include "../Common/Url/Url.h"
 #include "../Common/String/NSString.h"
 #include "../Common/FileManager/FileManange.h"
+
+#include "../MiniBlink/xldownloader.h"
+#include "../MiniBlink/Aria2cEngine.h"
+#include "../MiniBlink/Aria2RPC.h"
+
+#include "MainWnd.h"
+#include "resource.h"
+#include "UI/DownloadWnd.h"
+#include "UI/MsgWnd.h"
+#include "UI/MiniControls.h"
 
 //////////////////////////////////////////////////////////////////////////
 ///
@@ -49,8 +51,6 @@ DUI_BEGIN_MESSAGE_MAP(CMainWnd, WindowImplBase)
     DUI_ON_MSGTYPE(DUI_MSGTYPE_TABINDEXCHANGED, OnTabIndexChanged)
     DUI_ON_MSGTYPE(DUI_MSGTYPE_TABCLOSED, OnTabClosed)
 DUI_END_MESSAGE_MAP()
-
-#include "Aria2RPC.h"
 
 CMainWnd::CMainWnd(void) {
     // gblAria2RPCGet->addUri("", "");

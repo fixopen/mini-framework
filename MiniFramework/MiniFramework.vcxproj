@@ -86,12 +86,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_HAS_STD_BYTE=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>..\..\..\..\zlib\contrib\minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\zlib\contrib\minizip;..\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,11 +147,22 @@
     <Text Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainWnd.cpp" />
+    <ClCompile Include="MainWnd.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TagControl.cpp" />
+    <ClCompile Include="TagControl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="UI\DownloadWnd.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="UI\MiniControls.cpp" />
+    <ClCompile Include="UI\MsgWnd.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="utils\Application.cpp" />
     <ClCompile Include="utils\AudioPlayer.cpp" />
     <ClCompile Include="utils\base64.cpp" />
@@ -178,8 +190,12 @@
     <ClCompile Include="utils\Volume.cpp" />
     <ClCompile Include="utils\XmlParser.cpp" />
     <ClCompile Include="utils\zip.cpp" />
-    <ClCompile Include="WkeDemo.cpp" />
-    <ClCompile Include="WkeWebkit.cpp" />
+    <ClCompile Include="WkeDemo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="WkeWebkit.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWnd.h" />
@@ -188,6 +204,9 @@
     <ClInclude Include="TagControl.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TroyControls.h" />
+    <ClInclude Include="UI\DownloadWnd.h" />
+    <ClInclude Include="UI\MiniControls.h" />
+    <ClInclude Include="UI\MsgWnd.h" />
     <ClInclude Include="utils\Application.h" />
     <ClInclude Include="utils\AudioPlayer.h" />
     <ClInclude Include="utils\base64.h" />
