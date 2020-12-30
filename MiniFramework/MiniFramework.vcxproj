@@ -86,10 +86,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>..\..\..\..\zlib\contrib\minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +144,78 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainWnd.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TagControl.cpp" />
+    <ClCompile Include="utils\Application.cpp" />
+    <ClCompile Include="utils\AudioPlayer.cpp" />
+    <ClCompile Include="utils\base64.cpp" />
+    <ClCompile Include="utils\BasicExcel.cpp" />
+    <ClCompile Include="utils\comm.cpp" />
+    <ClCompile Include="utils\Communication.cpp" />
+    <ClCompile Include="utils\concurrent.cpp" />
+    <ClCompile Include="utils\Control.cpp" />
+    <ClCompile Include="utils\CsvParser.cpp" />
+    <ClCompile Include="utils\Folders.cpp" />
+    <ClCompile Include="utils\Heartbeat.cpp" />
+    <ClCompile Include="utils\Log.cpp" />
+    <ClCompile Include="utils\md5.cpp" />
+    <ClCompile Include="utils\MD5Base.cpp" />
+    <ClCompile Include="utils\Mixer.cpp" />
+    <ClCompile Include="utils\Mutex.cpp" />
+    <ClCompile Include="utils\MyMenu.cpp" />
+    <ClCompile Include="utils\Process.cpp" />
+    <ClCompile Include="utils\Reg.cpp" />
+    <ClCompile Include="utils\Screen.cpp" />
+    <ClCompile Include="utils\Settings.cpp" />
+    <ClCompile Include="utils\SqlData.cpp" />
+    <ClCompile Include="utils\Texts.cpp" />
+    <ClCompile Include="utils\Utils.cpp" />
+    <ClCompile Include="utils\Volume.cpp" />
+    <ClCompile Include="utils\XmlParser.cpp" />
+    <ClCompile Include="utils\zip.cpp" />
+    <ClCompile Include="WkeDemo.cpp" />
+    <ClCompile Include="WkeWebkit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainWnd.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="TagControl.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TroyControls.h" />
+    <ClInclude Include="utils\Application.h" />
+    <ClInclude Include="utils\AudioPlayer.h" />
+    <ClInclude Include="utils\base64.h" />
+    <ClInclude Include="utils\BasicExcel.hpp" />
+    <ClInclude Include="utils\comm.h" />
+    <ClInclude Include="utils\Communication.h" />
+    <ClInclude Include="utils\concurrent.h" />
+    <ClInclude Include="utils\Control.h" />
+    <ClInclude Include="utils\CsvParser.h" />
+    <ClInclude Include="utils\Folders.h" />
+    <ClInclude Include="utils\Heartbeat.h" />
+    <ClInclude Include="utils\Log.h" />
+    <ClInclude Include="utils\md5.h" />
+    <ClInclude Include="utils\MD5Base.h" />
+    <ClInclude Include="utils\Mixer.h" />
+    <ClInclude Include="utils\Mutex.h" />
+    <ClInclude Include="utils\MyMenu.h" />
+    <ClInclude Include="utils\Process.h" />
+    <ClInclude Include="utils\Reg.h" />
+    <ClInclude Include="utils\Screen.h" />
+    <ClInclude Include="utils\Settings.h" />
+    <ClInclude Include="utils\SqlData.h" />
+    <ClInclude Include="utils\Texts.h" />
+    <ClInclude Include="utils\Utils.h" />
+    <ClInclude Include="utils\Volume.h" />
+    <ClInclude Include="utils\XmlParser.h" />
+    <ClInclude Include="utils\zip.h" />
+    <ClInclude Include="WkeWebkit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
