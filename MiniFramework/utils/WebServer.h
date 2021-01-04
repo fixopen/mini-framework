@@ -5,7 +5,7 @@
 namespace utils {
     class WebServer {
     public:
-        WebServer(std::string const& host, unsigned short port);
+        WebServer(std::string const& host, unsigned short port, std::string const& root);
     private:
     };
 }
