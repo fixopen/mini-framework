@@ -92,24 +92,24 @@ void CWebSocketClient::Start(std::string url) {
             h.onConnection([&h, &pthis, &pevent](uWS::WebSocket<uWS::CLIENT>* ws, uWS::HttpRequest req) {
                 bool bSuccess = true;
                 /*
-                            switch ((long)ws->getUserData())
-                            {
-                            case 8:
-                                std::cout << "Client established a remote connection over non-SSL" << std::endl;
-                                bSuccess = false;
-                                ws->close(1000);
-                                break;
-                            case 9:
-                                std::cout << "Client established a remote connection over SSL" << std::endl;
-                                bSuccess = false;
+                switch ((long)ws->getUserData())
+                {
+                case 8:
+                    std::cout << "Client established a remote connection over non-SSL" << std::endl;
+                    bSuccess = false;
+                    ws->close(1000);
+                    break;
+                case 9:
+                    std::cout << "Client established a remote connection over SSL" << std::endl;
+                    bSuccess = false;
 
-                                ws->close(1000);
-                                break;
-                            default:
-                                std::cout << "FAILURE: " << ws->getUserData() << " should not connect!" << std::endl;
-                                bSuccess = false;
-                                break;
-                            }
+                    ws->close(1000);
+                    break;
+                default:
+                    std::cout << "FAILURE: " << ws->getUserData() << " should not connect!" << std::endl;
+                    bSuccess = false;
+                    break;
+                }
                 */
                 if (pevent) {
                     pevent->onConnection(bSuccess);

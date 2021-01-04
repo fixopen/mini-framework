@@ -216,6 +216,40 @@ namespace utils::Texts {
         //return result;
     }
 
+    int replaceString(std::string& str, std::string const& origin, std::string const& target) {
+        int result = 0;
+        std::string r;
+        size_t offset = 0;
+        size_t pos = str.find_first_of(origin, offset);
+        while (pos == std::string::npos) {
+            r += str.substr(offset, pos - offset);
+            r += target;
+            offset += pos + origin.length();
+            pos = str.find_first_of(origin, offset);
+            ++result;
+        }
+        r += str.substr(offset);
+        str = r;
+        return result;
+    }
+
+    int replaceString(std::wstring& str, std::wstring const& origin, std::wstring const& target) {
+        int result = 0;
+        std::wstring r;
+        size_t offset = 0;
+        size_t pos = str.find_first_of(origin, offset);
+        while (pos == std::wstring::npos) {
+            r += str.substr(offset, pos - offset);
+            r += target;
+            offset += pos + origin.length();
+            pos = str.find_first_of(origin, offset);
+            ++result;
+        }
+        r += str.substr(offset);
+        str = r;
+        return result;
+    }
+
     //std::wstring const fromCString(CString const& unicode) {
     //	return static_cast<LPCTSTR>(unicode);
     //}

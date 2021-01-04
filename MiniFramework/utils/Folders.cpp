@@ -16,6 +16,7 @@
 #include <winver.h> // for GetFileVersionInfoSizeW, VerQueryValueW lib: Version.lib
 //#include <verrsrc.h> // for VS_FIXEDFILEINFO
 #include <cstdio> // for std::FILE, std::fopen, std::fclose, std::fseek, std::ftell, std::fread, std::fwrite
+#include <atlimage.h>
 
 //#include <WTypesbase.h>
 //#include <minwindef.h>
@@ -698,6 +699,15 @@ namespace utils::Folders {
             }
         }
         return result;
+    }
+
+    HRESULT SaveImage(std::wstring const& source, std::wstring const& destination) {
+        CImage image;
+        HRESULT hResult = image.Load(source.c_str());
+        if (hResult == S_OK) {
+            hResult = image.Save(destination.c_str());
+        }
+        return hResult;
     }
 
     size_t CipherData(char* data, size_t length, bool isEncrypt) {

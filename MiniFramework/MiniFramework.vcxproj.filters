@@ -131,6 +131,12 @@
     <ClCompile Include="UI\MsgWnd.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="utils\Url.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\WebServer.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\Application.h">
@@ -244,5 +250,16 @@
     <ClInclude Include="UI\MsgWnd.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="utils\Url.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\WebServer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MiniFramework.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -30,15 +30,15 @@ namespace utils::Folders {
 
     std::map<std::wstring, unsigned int> const GetDisks();
 
-    std::pair <std::wstring, std::wstring> const GetPhyDriveSerial();
+    std::pair<std::wstring, std::wstring> const GetPhyDriveSerial();
 
     std::wstring const GetProfilePathName();
 
-    std::vector <std::wstring> ListFiles(std::wstring const &folder);
+    std::vector<std::wstring> ListFiles(std::wstring const &folder);
 
-    std::vector <std::wstring> ListFileNames(std::wstring const &folder);
+    std::vector<std::wstring> ListFileNames(std::wstring const &folder);
 
-    std::vector <WIN32_FIND_DATAW> ListOneLevelFiles(std::wstring const &folder);
+    std::vector<WIN32_FIND_DATAW> ListOneLevelFiles(std::wstring const &folder);
 
     void FileDelete(std::wstring const& filename);
 
@@ -75,7 +75,9 @@ namespace utils::Folders {
 
     std::string const ReadFile(std::wstring const &filename);
 
-    std::vector <std::wstring> const ReadFileLines(std::wstring const &filename);
+    std::vector<std::wstring> const ReadFileLines(std::wstring const &filename);
+
+    HRESULT SaveImage(std::wstring const& source, std::wstring const& destinaion);
 
     size_t EncryptData(char *data, size_t length);
 

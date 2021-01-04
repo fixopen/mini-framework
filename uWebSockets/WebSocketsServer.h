@@ -10,22 +10,22 @@ public:
 
     ~CWebSocketsServer();
 
-    //启动ws服务器
+    // 启动ws服务器
     void Start(int nPort);
 
-    //给所有客户端发送消息
+    // 给所有客户端发送消息
     void sendTextMessage(std::string text, OpCode opCode = TEXT);
 
-    //关闭ws服务器
+    // 关闭ws服务器
     void Stop();
 
-    //开启心跳
+    // 开启心跳
     void StartTimeEvent(int nMiliseconds);
 
-    //停止心跳
+    // 停止心跳
     void StopTimeEvent();
 
-    //设置回调事件
+    // 设置回调事件
     void SetEvent(UWebSocketsServerEvent* event);
 
     void onTimeEvent();

@@ -14,13 +14,17 @@ namespace utils::Texts {
 
     std::string const decodeUrl(std::string const &encodeUrl);
 
-    std::vector <std::wstring> const split(std::wstring const &data, wchar_t const delimitation);
+    std::vector<std::wstring> const split(std::wstring const &data, wchar_t const delimitation);
 
-    std::vector <std::string> const split(std::string const &data, char const delimitation);
+    std::vector<std::string> const split(std::string const &data, char const delimitation);
 
-    std::vector <std::wstring> const split(std::wstring const &data, std::wstring const &delimitation);
+    std::vector<std::wstring> const split(std::wstring const &data, std::wstring const &delimitation);
 
-    std::vector <std::string> const split(std::string const &data, std::string const &delimitation);
+    std::vector<std::string> const split(std::string const &data, std::string const &delimitation);
+
+    int replaceString(std::string& str, std::string const& origin, std::string const& target);
+
+    int replaceString(std::wstring& str, std::wstring const& origin, std::wstring const& target);
 
     //std::wstring const fromCString(CString const& unicode);
     //CString const toCString(std::wstring const& unicode);

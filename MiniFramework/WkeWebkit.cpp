@@ -7,8 +7,9 @@
 #include <shlwapi.h>
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "imm32.lib")
-#include "../Common/String/NSString.h"
-#include "../Common/Url/Url.h"
+
+//#include "../Common/String/NSString.h"
+#include "utils/Url.h"
 #include "utils/Texts.h"
 #include "utils/Log.h"
 #include "utils/SqlData.h"
@@ -85,7 +86,7 @@ void CWkeWebkitUI::DoInit() {
     wkeSetHandle(m_pWebView, hWnd);
 
     // 设置名称
-    wkeSetName(m_pWebView, NStr::T2ANSI(GetName()).c_str());
+    wkeSetName(m_pWebView, utils::Texts::toNative(static_cast<const wchar_t*>(GetName())).c_str());
 
     // 初始化后回调接口
     wkeSetTransparent(m_pWebView, false); //通知无窗口模式下，webview开启透明模式。
@@ -250,7 +251,7 @@ void CWkeWebkitUI::UninitializeWebkit() {
 }
 
 void CWkeWebkitUI::ExecuteJS(LPCTSTR lpJS) {
-    wkeRunJS(m_pWebView, NStr::T2UTF8(lpJS).c_str());
+    wkeRunJS(m_pWebView, utils::Texts::toNative(lpJS).c_str());
 }
 
 void CWkeWebkitUI::updateCursor() {
@@ -412,7 +413,7 @@ wkeWebView CWkeWebkitUI::GetWebView() {
 }
 
 void CWkeWebkitUI::Navigate(LPCTSTR lpUrl) {
-    common::Url uri(NStr::WStrToStr(lpUrl).c_str());
+    common::Url uri(utils::Texts::toNative(lpUrl).c_str());
     std::string strscheme = uri.GetScheme();
     if (_tcslen(lpUrl) >= 8 && (strscheme == "http" || strscheme == "https" || StrCmp(lpUrl, L"about:blank") == 0)
         ) {
@@ -594,7 +595,7 @@ bool  WKE_CALL_TYPE CWkeWebkitUI::onLoadUrlBegin(wkeWebView webView, void* param
         std::string urlString(decodeURL);
         std::string localPath = urlString.substr(sizeof(kPreHead) - 1);
 
-        std::wstring path = CPaintManagerUI::GetInstancePath().GetData() + NStr::utf8ToUtf16(localPath);
+        std::wstring path = CPaintManagerUI::GetInstancePath().GetData() + utils::Texts::fromUtf8(localPath);
         std::vector<char> buffer;
 
         readJsFile(path.c_str(), &buffer);

@@ -7,9 +7,11 @@
 #include <ShellAPI.h>
 #include <thread>
 
-#include "../Common/Url/Url.h"
-#include "../Common/String/NSString.h"
-#include "../Common/FileManager/FileManange.h"
+#include "utils/Texts.h"
+#include "utils/Folders.h"
+#include "utils/Url.h"
+//#include "../Common/String/NSString.h"
+//#include "../Common/FileManager/FileManange.h"
 
 #include "../MiniBlink/xldownloader.h"
 #include "../MiniBlink/Aria2cEngine.h"
@@ -78,7 +80,7 @@ void CMainWnd::OnFinalMessage(HWND hWnd) {
 }
 
 void CMainWnd::InitWindow() {
-    //设置任务栏图标
+    // 设置任务栏图标
     SetIcon(IDR_MAINFRAME);
     m_pCloseBtn = static_cast<CButtonUI*>(m_pm.FindControl(_T("closebtn")));
     m_pMaxBtn = static_cast<CButtonUI*>(m_pm.FindControl(_T("maxbtn")));
@@ -615,9 +617,11 @@ void CMainWnd::OnWkeNetGetFavicon(CWkeWebkitUI* webView, const char* url, wkeMem
     common::Url uri(url);
     bool ret = std::regex_search(strUrl, results, re);
     if (ret) {
-        std::string  strFileName = results[1]; ;
-        std::string strdownPath = NFile::GetRootDirectoryA() + "favicon\\";
-        NFile::CreateDir(strdownPath.c_str());
+        std::string  strFileName = results[1];
+        // std::string strdownPath = NFile::GetRootDirectoryA() + "favicon\\";
+        std::string strdownPath = utils::Texts::toNative(utils::Folders::GetCurrentPath()) + "favicon\\";
+        // NFile::CreateDir(strdownPath.c_str());
+        utils::Folders::MakeDir(utils::Texts::fromNative(strdownPath));
         strFileName = strdownPath + uri.GetHost() + strFileName;
         FILE* file;
         file = fopen(strFileName.c_str(), "wb");
@@ -626,10 +630,13 @@ void CMainWnd::OnWkeNetGetFavicon(CWkeWebkitUI* webView, const char* url, wkeMem
             fclose(file);
         }
         std::string strPngName = strFileName;
-        NStr::ReplaceStr(strPngName, ".ico", "");
-        NStr::ReplaceStr(strPngName, ".", "");
+        // NStr::ReplaceStr(strPngName, ".ico", "");
+        utils::Texts::replaceString(strPngName, ".ico", "");
+        // NStr::ReplaceStr(strPngName, ".", "");
+        utils::Texts::replaceString(strPngName, ".", "");
         strPngName = strPngName + ".png";
-        NFile::SaveImage(NStr::StrToWStr(strFileName), NStr::StrToWStr(strPngName));
+        // NFile::SaveImage(utils::Texts::fromNative(strFileName), utils::Texts::fromNative(strPngName));
+        utils::Folders::SaveImage(utils::Texts::fromNative(strFileName), utils::Texts::fromNative(strPngName));
         //vector<TabInfo*>::iterator it = find_if(m_vTabs.begin(), m_vTabs.end(), web_finder(webView));
         //if (it != m_vTabs.end()) {
         //    TabInfo* pInfo = *it;

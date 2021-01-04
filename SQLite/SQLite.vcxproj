@@ -172,6 +172,9 @@
     <ClCompile Include="SQLite.cpp" />
     <ClCompile Include="sqlite3.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="new-schema.sql" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

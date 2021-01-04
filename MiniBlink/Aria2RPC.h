@@ -36,7 +36,7 @@ public:
 private:
     void sendMessage(const std::string& method, const std::string& id, NSJsonArray params);
 
-    //void handleNetworkReply(QNetworkReply *reply, const std::string &method);
+    // void handleNetworkReply(QNetworkReply *reply, const std::string &method);
     void handleTellStatus(const NSJsonObject& object);
 };
 

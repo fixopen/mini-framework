@@ -39,7 +39,7 @@ std::string Gbk_To_Utf8(const char* szBuff) {
     int MultiLen = 0;
     WCHAR* widPtr = nullptr;
     CHAR* MulitPtr = nullptr;
-    widLen = ::MultiByteToWideChar(CP_ACP, NULL, szBuff, -1, NULL, NULL);//获取转换后需要的空间
+    widLen = ::MultiByteToWideChar(CP_ACP, NULL, szBuff, -1, NULL, NULL); // 获取转换后需要的空间
     widPtr = new WCHAR[widLen + 1];
     if (!widPtr)
         return resault;
@@ -197,12 +197,12 @@ void ClientEvent::OnMessage(std::string message, CWebSocketClient* client) {
             NSJsonObject resultobj = jsonObject.Get("result");
         }
         strMethod = jsonObject.GetString("method");
-        if (strMethod == "aria2.onDownloadStart") { //开始下载
-        } else if (strMethod == "aria2.onDownloadPause") { //暂停下载
-        } else if (strMethod == "aria2.onDownloadStop") { //用户自己停止下载
-        } else if (strMethod == "aria2.onDownloadComplete") { //下载完成提示
-        } else if (strMethod == "aria2.onDownloadError") { //出现错误导致下载停止
-        } else if (strMethod == "aria2.onBtDownloadComplete") { //当torrent下载完成但播种仍在继续时，将发送此通知
+        if (strMethod == "aria2.onDownloadStart") { // 开始下载
+        } else if (strMethod == "aria2.onDownloadPause") { // 暂停下载
+        } else if (strMethod == "aria2.onDownloadStop") { // 用户自己停止下载
+        } else if (strMethod == "aria2.onDownloadComplete") { // 下载完成提示
+        } else if (strMethod == "aria2.onDownloadError") { // 出现错误导致下载停止
+        } else if (strMethod == "aria2.onBtDownloadComplete") { // 当torrent下载完成但播种仍在继续时，将发送此通知
         }
     }
 }

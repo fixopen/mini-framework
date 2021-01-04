@@ -159,6 +159,7 @@ namespace utils::SqlData {
             UNKNOWN,
             TEXT,
             INTEGER,
+            REAL,
             BLOB
         };
         std::wstring name;

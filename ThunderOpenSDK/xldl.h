@@ -70,9 +70,9 @@ struct DownTaskInfo
 		bIsOriginUsable = false;
 		fHashPercent = 0;
 	}
-	DOWN_TASK_STATUS	stat;//任务状态
-	TASK_ERROR_TYPE		fail_code;//错误码
-	wchar_t		szFilename[MAX_PATH];//文件名 
+	DOWN_TASK_STATUS	stat; // 任务状态
+	TASK_ERROR_TYPE		fail_code; // 错误码
+	wchar_t		szFilename[MAX_PATH]; // 文件名 
 	wchar_t		szReserved0[MAX_PATH];
 	__int64     nTotalSize;         // 该任务总大小(字节)
 	__int64     nTotalDownload;     // 下载有效字节数(可能存在回退的情况)

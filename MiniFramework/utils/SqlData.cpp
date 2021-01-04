@@ -285,37 +285,27 @@ namespace utils::SqlData {
         }
 
         std::map<std::wstring, std::vector<ColumnMeta>> const TABLE_METAS{
+                { L"properties", { { L"id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"value", ColumnMeta::TEXT } } },
                 { L"templates", { { L"id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"state", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
-                { L"types", { { L"id", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
-                { L"codes", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"value", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
-                { L"schemas", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type_no", ColumnMeta::INTEGER }, { L"is_required", ColumnMeta::INTEGER }, { L"restriction", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
-                { L"lists", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"element_type_no", ColumnMeta::INTEGER }, { L"min", ColumnMeta::INTEGER }, { L"max", ColumnMeta::INTEGER }, { L"group_by", ColumnMeta::TEXT }, { L"is_hidden", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"types", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"restrictions", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"length", ColumnMeta::INTEGER }, { L"precision", ColumnMeta::INTEGER }, { L"min", ColumnMeta::REAL }, { L"max", ColumnMeta::REAL } } },
                 { L"unit_types", { { L"id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
                 { L"units", { { L"id", ColumnMeta::INTEGER }, { L"type_id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"symbol", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
-                { L"组织", { { L"id", ColumnMeta::INTEGER }, { L"编号", ColumnMeta::TEXT }, { L"名称", ColumnMeta::TEXT }, { L"类型", ColumnMeta::INTEGER }, { L"地址", ColumnMeta::TEXT }, { L"电话", ColumnMeta::TEXT }, { L"联系人", ColumnMeta::TEXT }, { L"管理员id", ColumnMeta::INTEGER }, { L"备注", ColumnMeta::TEXT } } },
-                { L"用户", { { L"id", ColumnMeta::INTEGER }, { L"登录名", ColumnMeta::TEXT }, { L"姓名", ColumnMeta::TEXT }, { L"性别", ColumnMeta::INTEGER }, { L"生日", ColumnMeta::TEXT }, { L"组织id", ColumnMeta::INTEGER }, { L"住址", ColumnMeta::TEXT }, { L"电话", ColumnMeta::TEXT }, { L"email", ColumnMeta::TEXT }, { L"website", ColumnMeta::TEXT }, { L"密码", ColumnMeta::TEXT }, { L"role", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"机型", { { L"id", ColumnMeta::INTEGER }, { L"模板id", ColumnMeta::INTEGER }, { L"类型", ColumnMeta::INTEGER }, { L"名称", ColumnMeta::TEXT }, { L"工厂id", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"状态", { { L"id", ColumnMeta::INTEGER }, { L"机型id", ColumnMeta::INTEGER }, { L"编号", ColumnMeta::TEXT }, { L"使命任务", ColumnMeta::TEXT }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"批次", { { L"id", ColumnMeta::INTEGER }, { L"状态id", ColumnMeta::INTEGER }, { L"编号", ColumnMeta::TEXT }, { L"飞机编号范围", ColumnMeta::TEXT }, { L"发动机编号范围", ColumnMeta::TEXT }, { L"布局", ColumnMeta::TEXT }, { L"主要技术参数", ColumnMeta::TEXT }, { L"主要配备", ColumnMeta::TEXT }, { L"喷涂方案", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"基线", { { L"id", ColumnMeta::INTEGER }, { L"适用目标", ColumnMeta::INTEGER }, { L"目标id", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"飞机", { { L"id", ColumnMeta::INTEGER }, { L"批次id", ColumnMeta::INTEGER }, { L"编号", ColumnMeta::TEXT }, { L"承制单位id", ColumnMeta::INTEGER }, { L"接装单位id", ColumnMeta::INTEGER }, { L"移交时间", ColumnMeta::TEXT }, { L"移交编号", ColumnMeta::TEXT }, { L"使用寿命", ColumnMeta::INTEGER }, { L"剩余寿命", ColumnMeta::INTEGER }, { L"引擎型号", ColumnMeta::TEXT }, { L"引擎编号", ColumnMeta::TEXT }, { L"引擎使用寿命", ColumnMeta::INTEGER }, { L"引擎剩余寿命", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"构型", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"序号", ColumnMeta::INTEGER }, { L"名称", ColumnMeta::TEXT }, { L"型号", ColumnMeta::TEXT }, { L"承制单位id", ColumnMeta::INTEGER }, { L"extended", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                // { L"softwares", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"构型节点id", ColumnMeta::INTEGER }, { L"名称", ColumnMeta::TEXT }, { L"版本", ColumnMeta::TEXT }, { L"重要度", ColumnMeta::TEXT },{ L"研制单位id", ColumnMeta::INTEGER }, { L"状态", ColumnMeta::TEXT }, { L"主管", ColumnMeta::TEXT }, { L"extended", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"softwares", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"构型节点id", ColumnMeta::INTEGER }, { L"名称", ColumnMeta::TEXT }, { L"版本", ColumnMeta::TEXT }, { L"重要度", ColumnMeta::TEXT },{ L"研制单位id", ColumnMeta::INTEGER }, { L"状态", ColumnMeta::TEXT }, { L"主管", ColumnMeta::TEXT }, { L"extended", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"support_configs", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"table_no", ColumnMeta::INTEGER }/*, { L"table_name", ColumnMeta::TEXT }*/ } },
-                { L"随机设备工具", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"专业", ColumnMeta::INTEGER }, { L"序号", ColumnMeta::TEXT }, { L"名称", ColumnMeta::TEXT }, { L"型号", ColumnMeta::TEXT }, { L"用途", ColumnMeta::TEXT }, { L"配套比例", ColumnMeta::TEXT }, { L"定价", ColumnMeta::TEXT }, { L"承制单位id", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"机械专业随机备件", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"序号", ColumnMeta::TEXT }, { L"名称", ColumnMeta::TEXT }, { L"型号(图号)", ColumnMeta::TEXT }, { L"单机数量", ColumnMeta::TEXT }, { L"比例及数量", ColumnMeta::TEXT }, { L"所属系统", ColumnMeta::TEXT }, { L"安装使用部位", ColumnMeta::TEXT }, { L"承制单位id", ColumnMeta::INTEGER }, { L"extended", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"随机资料目录", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"序号", ColumnMeta::TEXT }, { L"资料编号", ColumnMeta::TEXT }, { L"手册名称", ColumnMeta::TEXT }, { L"册数", ColumnMeta::TEXT }, { L"单册页数", ColumnMeta::TEXT }, { L"密级", ColumnMeta::TEXT }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"随机资料配套目录", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"序号", ColumnMeta::TEXT }, { L"资料名称", ColumnMeta::TEXT }, { L"手册编制的参考标准", ColumnMeta::TEXT }, { L"主要用途/使用时机/使用地点", ColumnMeta::TEXT }, { L"主要使用对象", ColumnMeta::TEXT }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"技术状态文件", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"类型", ColumnMeta::INTEGER }, { L"previous_version_id", ColumnMeta::INTEGER }, { L"路径", ColumnMeta::TEXT }, { L"编号", ColumnMeta::TEXT }, { L"名称", ColumnMeta::TEXT }, { L"版本", ColumnMeta::TEXT }, { L"修订时间", ColumnMeta::TEXT }, { L"构型节点id", ColumnMeta::INTEGER }, { L"附件", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT }, { L"备注", ColumnMeta::TEXT } } },
-                { L"有寿件", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT } } },
-                { L"双流水", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT } } },
-                { L"交付遗留问题及处置情况", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"扩展", ColumnMeta::TEXT } } },
-                { L"change_histories", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"time", ColumnMeta::TEXT }, { L"no", ColumnMeta::TEXT }, { L"control_file_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
-                { L"change_history_details", { { L"id", ColumnMeta::INTEGER }, { L"change_history_id", ColumnMeta::INTEGER }, { L"from_file_id", ColumnMeta::INTEGER }, { L"to_file_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
-                { L"files", { { L"id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::TEXT }, { L"ext", ColumnMeta::TEXT }, { L"content", ColumnMeta::BLOB }, { L"size", ColumnMeta::INTEGER }, { L"digest", ColumnMeta::TEXT } } },
-                { L"info_configs", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"table_no", ColumnMeta::INTEGER }, { L"table_field_no", ColumnMeta::INTEGER } } },
-                { L"histories", { { L"id", ColumnMeta::INTEGER }, { L"基线id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"no", ColumnMeta::TEXT }, { L"object", ColumnMeta::TEXT }, { L"abstract", ColumnMeta::TEXT }, { L"operator", ColumnMeta::TEXT }, { L"time", ColumnMeta::TEXT }, { L"control_file_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } }
+                { L"info_configs", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type_no", ColumnMeta::INTEGER }, { L"restriction_id", ColumnMeta::INTEGER }, { L"unit_id", ColumnMeta::INTEGER } } },
+                { L"codes", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"value", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
+                { L"schemas", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"title", ColumnMeta::TEXT }, { L"is_hidden", ColumnMeta::INTEGER }, { L"type_no", ColumnMeta::INTEGER }, { L"is_required", ColumnMeta::INTEGER }, { L"restriction_id", ColumnMeta::INTEGER }, { L"unit_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"lists", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"element_type_no", ColumnMeta::INTEGER }, { L"min", ColumnMeta::INTEGER }, { L"max", ColumnMeta::INTEGER }, { L"group_by", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
+                { L"baselines", { { L"id", ColumnMeta::INTEGER }, { L"object_type", ColumnMeta::INTEGER }, { L"object_id", ColumnMeta::INTEGER }, { L"previous_version_id", ColumnMeta::INTEGER } } },
+                { L"data", { { L"id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"baseline_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"ref_id", ColumnMeta::INTEGER }, { L"serial_no", ColumnMeta::INTEGER }, { L"data", ColumnMeta::TEXT } } },
+                { L"files", { { L"id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::TEXT }, { L"name", ColumnMeta::TEXT }, { L"ext", ColumnMeta::TEXT }, { L"content", ColumnMeta::BLOB }, { L"size", ColumnMeta::INTEGER }, { L"digest", ColumnMeta::TEXT } } },
+                { L"organizations", { { L"id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"no", ColumnMeta::TEXT }, { L"name", ColumnMeta::TEXT }, { L"type", ColumnMeta::INTEGER }, { L"address", ColumnMeta::TEXT }, { L"telephone", ColumnMeta::TEXT }, { L"contact", ColumnMeta::TEXT }, { L"manager_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"users", { { L"id", ColumnMeta::INTEGER }, { L"login_name", ColumnMeta::TEXT }, { L"name", ColumnMeta::TEXT }, { L"sex", ColumnMeta::INTEGER }, { L"birthday", ColumnMeta::TEXT }, { L"organization_id", ColumnMeta::INTEGER }, { L"address", ColumnMeta::TEXT }, { L"telephone", ColumnMeta::TEXT }, { L"email", ColumnMeta::TEXT }, { L"website", ColumnMeta::TEXT }, { L"password", ColumnMeta::TEXT }, { L"role", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
+                { L"logs", { { L"id", ColumnMeta::INTEGER }, { L"time", ColumnMeta::INTEGER }, { L"operator_id", ColumnMeta::INTEGER }, { L"data_type", ColumnMeta::INTEGER }, { L"data_item", ColumnMeta::INTEGER }, { L"action", ColumnMeta::TEXT }, { L"abstract", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
+                { L"models", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"factory_id", ColumnMeta::INTEGER }, { L"state", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"states", { { L"id", ColumnMeta::INTEGER }, { L"model_id", ColumnMeta::INTEGER }, { L"no", ColumnMeta::TEXT }, { L"state", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"batchs", { { L"id", ColumnMeta::INTEGER }, { L"state_id", ColumnMeta::INTEGER }, { L"no", ColumnMeta::TEXT }, { L"air_no_range", ColumnMeta::TEXT }, { L"engine_no_range", ColumnMeta::TEXT }, { L"state", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"airs", { { L"id", ColumnMeta::INTEGER }, { L"batch_id", ColumnMeta::INTEGER }, { L"tag", ColumnMeta::TEXT }, { L"no", ColumnMeta::TEXT }, { L"factory_id", ColumnMeta::INTEGER }, { L"use_organization_id", ColumnMeta::INTEGER }, { L"offer_time", ColumnMeta::TEXT }, { L"offer_no", ColumnMeta::TEXT }, { L"lifespan", ColumnMeta::REAL }, { L"residue_span", ColumnMeta::REAL }, { L"engine_model", ColumnMeta::TEXT }, { L"engine_no", ColumnMeta::TEXT }, { L"engine_lifespan", ColumnMeta::REAL }, { L"engine_residue_span", ColumnMeta::REAL }, { L"state", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
+                { L"histories", { { L"id", ColumnMeta::INTEGER }, { L"baseline_id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"no", ColumnMeta::TEXT }, { L"object", ColumnMeta::TEXT }, { L"abstract", ColumnMeta::TEXT }, { L"operator", ColumnMeta::TEXT }, { L"time", ColumnMeta::TEXT }, { L"control_file_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } }
         };
     }
 
@@ -564,6 +554,13 @@ namespace utils::SqlData {
                     data[Texts::toUtf8(columns[i].name)] = nullptr;
                 }
                 break;
+            case ColumnMeta::REAL:
+                if (cell.has_value()) {
+                    data[Texts::toUtf8(columns[i].name)] = std::stod(cell.value());
+                } else {
+                    data[Texts::toUtf8(columns[i].name)] = nullptr;
+                }
+                break;
             case ColumnMeta::BLOB:
                 difference++;
                 break;
@@ -642,6 +639,17 @@ namespace utils::SqlData {
                 if (!data[fieldName].is_null()) {
                     if (data[fieldName].is_number()) {
                         std::int64_t value = data[fieldName].get<std::int64_t>();
+                        result = std::to_wstring(value);
+                    } else if (data[fieldName].is_string()) {
+                        std::string value = data[fieldName].get<std::string>();
+                        result = Texts::fromUtf8(value);
+                    }
+                }
+                break;
+            case ColumnMeta::REAL:
+                if (!data[fieldName].is_null()) {
+                    if (data[fieldName].is_number()) {
+                        double value = data[fieldName].get<double>();
                         result = std::to_wstring(value);
                     } else if (data[fieldName].is_string()) {
                         std::string value = data[fieldName].get<std::string>();

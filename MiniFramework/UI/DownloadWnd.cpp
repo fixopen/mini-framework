@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "DownloadWnd.h"
 
+#include "../utils/Texts.h"
 #include "../../Common/String/NSString.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -72,7 +73,7 @@ std::string CDownloadWnd::SelectResourcePath() {
         m_pPathEdit->SetText(strPath.c_str());
     }
     m_strPath = strPath;
-    return NStr::Unicode2ANSI(strPath.c_str());
+    return utils::Texts::toNative(strPath);
 }
 
 void CDownloadWnd::OnClick(TNotifyUI& msg) {
@@ -160,7 +161,7 @@ void CDownloadWnd::AddDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
                                                                                         &m_pm, NULL);
 
         CControlUI* pLabel = pListItem->FindSubControl(_T("NumberLaber"));
-        if (pLabel != NULL) pLabel->SetText(NStr::IntToWStr((int) hTask).c_str());
+        if (pLabel != NULL) pLabel->SetText(std::to_wstring((int) hTask).c_str());
 
 
         CControlUI* pFileNameLabel = pListItem->FindSubControl(_T("downFileNameLabel"));
@@ -204,7 +205,7 @@ void CDownloadWnd::UpdateDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
         CListContainerElementUI* pListElement = static_cast<CListContainerElementUI*>(pList->GetItemAt(i));
         if (pListElement) {
             CControlUI* pLabel = pListElement->FindSubControl(_T("NumberLaber"));
-            if (pLabel != NULL && pLabel->GetText().CompareNoCase(NStr::IntToWStr((int) hTask).c_str()) == 0) {
+            if (pLabel != NULL && pLabel->GetText().CompareNoCase(std::to_wstring((int) hTask).c_str()) == 0) {
                 CProgressUI* pPro1 = static_cast<CProgressUI*>(pListElement->FindSubControl(_T("downprogress")));
                 pPro1->SetValue(stTaskInfo.fPercent * 100);
 
