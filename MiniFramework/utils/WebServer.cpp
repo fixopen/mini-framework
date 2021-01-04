@@ -345,20 +345,24 @@ namespace utils {
                 closesocket(connection);
                 closesocket(sockfd);
                 */
-                struct MHD_Daemon* daemon;
-
-                daemon = MHD_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, port, NULL, NULL,
-                    &answer_to_connection, NULL, MHD_OPTION_END);
-                if (NULL == daemon) return 1;
-                getchar();
-
-                MHD_stop_daemon(daemon);
-                return 0;
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
                 return EXIT_FAILURE;
             }
         });
         t.detach();
+
+        struct MHD_Daemon* daemon;
+
+        daemon = MHD_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, port, NULL, NULL,
+            &answer_to_connection, NULL, MHD_OPTION_END);
+        if (NULL == daemon) {
+            // return 1;
+        }
+        getchar();
+
+        MHD_stop_daemon(daemon);
+        // return 0;
+
     }
 }
