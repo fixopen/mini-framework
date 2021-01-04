@@ -7,6 +7,8 @@
 
 #include <WinSock2.h> // for socket api
 
+#include "../microhttpd.h"
+
 //#include <boost/beast.hpp>
 //#include <boost/beast/core.hpp>
 //#include <boost/beast/http.hpp>
@@ -253,6 +255,25 @@ namespace utils {
     }
     */
 
+    namespace {
+        int answer_to_connection(void* cls, struct MHD_Connection* connection,
+            const char* url,
+            const char* method, const char* version,
+            const char* upload_data,
+            size_t* upload_data_size, void** con_cls) {
+            const char* page = "<html><body>Hello, browser!</body></html>";
+            struct MHD_Response* response;
+            int ret;
+
+            response = MHD_create_response_from_buffer(strlen(page),
+                (void*)page, MHD_RESPMEM_PERSISTENT);
+            ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+            MHD_destroy_response(response);
+
+            return ret;
+        }
+    }
+
     WebServer::WebServer(std::string const& host, unsigned short port, std::string const& root) {
         auto t = std::thread([&host, &port, &root] {
             try {
@@ -277,6 +298,7 @@ namespace utils {
                     // std::thread{ std::bind(&do_session, std::move(socket), doc_root) }.detach();
                 }
                 */
+                /*
                 // Create a socket (IPv4, TCP)
                 SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
                 if (sockfd == -1) {
@@ -322,6 +344,16 @@ namespace utils {
                 // Close the connections
                 closesocket(connection);
                 closesocket(sockfd);
+                */
+                struct MHD_Daemon* daemon;
+
+                daemon = MHD_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, port, NULL, NULL,
+                    &answer_to_connection, NULL, MHD_OPTION_END);
+                if (NULL == daemon) return 1;
+                getchar();
+
+                MHD_stop_daemon(daemon);
+                return 0;
             } catch (const std::exception& e) {
                 std::cerr << "Error: " << e.what() << std::endl;
                 return EXIT_FAILURE;
