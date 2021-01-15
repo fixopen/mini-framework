@@ -2,36 +2,20 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(SolutionDir)libmicrohttpd-0.9.72\w32\common\vs_dirs.props" />
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug-dll|Win32">
-      <Configuration>Debug-dll</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-dll|x64">
-      <Configuration>Debug-dll</Configuration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-static|Win32">
-      <Configuration>Debug-static</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-static|x64">
-      <Configuration>Debug-static</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-dll|Win32">
-      <Configuration>Release-dll</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-dll|x64">
-      <Configuration>Release-dll</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-static|Win32">
-      <Configuration>Release-static</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-static|x64">
-      <Configuration>Release-static</Configuration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -40,7 +24,7 @@
     <ProjectGuid>{9CFB0342-A9E7-483E-BEE5-A1DE22584C5A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libmicrohttpd</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
@@ -48,7 +32,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <ConfigurationType Condition="$(Configuration.EndsWith('-static'))">StaticLibrary</ConfigurationType>
-    <ConfigurationType Condition="! $(Configuration.EndsWith('-static'))">DynamicLibrary</ConfigurationType>
+    <ConfigurationType Condition="! $(Configuration.EndsWith('-static'))">StaticLibrary</ConfigurationType>
     <UseDebugLibraries Condition="$(Configuration.StartsWith('Debug'))">true</UseDebugLibraries>
     <UseDebugLibraries Condition="! $(Configuration.StartsWith('Debug'))">false</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
@@ -63,24 +47,29 @@
   </ImportGroup>
   <Import Project="$(MhdW32Common)common-build-settings.vcxproj" />
   <Import Project="$(MhdW32Common)libmicrohttpd-build-settings.vcxproj" />
-  <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-dll|Win32'">
-    <ClCompile />
-    <Link />
-    <Lib />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-dll|Win32'">
-    <ClCompile>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-dll|Win32'">
-    <ClCompile>
+      <SDLCheck>true</SDLCheck>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <OmitFramePointers>false</OmitFramePointers>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;MHD_W32LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

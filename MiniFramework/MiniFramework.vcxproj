@@ -98,7 +98,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SQLite.lib;zlib.lib;minizip.lib;libmicrohttpd_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SQLite.lib;zlib.lib;minizip.lib;libmicrohttpd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
