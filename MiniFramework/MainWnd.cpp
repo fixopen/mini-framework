@@ -93,24 +93,13 @@ void CMainWnd::InitWindow() {
     m_pBrowserTabBody->AddAt(pWeb, 0);
     m_pBrowserTabBody->SetAutoDestroy(true);
     m_pBrowserTabBody->SelectItem(pWeb);
-    // const CDuiString homePagePath = _T("resources/dist/index.html");
+    const CDuiString homePagePath = _T("resources/dist/index.html");
     // --or--
-    const CDuiString homePagePath = _T("resources/db-test.html");
-    //CDuiString sHomePage = _T("http://www.baidu.com");
-    CDuiString sHomePage = _T("file:///E:/Projects/productmanage/db-test.html");
-    sHomePage = _T("file:///C:/Users/fixop/source/repos/ïw™C/productmanage/db-test.html");
-    sHomePage = _T("file:///C:/Users/fixop/source/repos/ïw™C/productmanage/mini.html");
-    //CDuiString sHomePage = _T("http://192.168.1.22:8080/");
-
-    //CDuiString sUrl = L"http://hook.test/resources/view/index.html";
-    //CDuiString sUrl = L"file:///E:/study/MiniBlinkBrowser/bin/resources/error/error.html";
-    //CDuiString sUrl = sHomePage;
+    // const CDuiString homePagePath = _T("resources/db-test.html");
     CDuiString scheme = _T("file:///");
     CDuiString base = CPaintManagerUI::GetInstancePath();
     base.Replace(_T("\\"), _T("/"));
     CDuiString sUrl = scheme + base + homePagePath;
-    //sUrl = _T("https://powerdos.github.io/Mall-Vue/index.html");
-    //sUrl = sHomePage;
     pWeb->Navigate(sUrl);
     pWeb->SetWkeCallback(this);
     /*
