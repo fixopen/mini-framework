@@ -7,6 +7,8 @@
 #include "resource.h"
 #include "utils/SqlData.h"
 #include "utils/Folders.h"
+#include "utils/Texts.h"
+#include "utils/WebServer.h"
 #include "utils/zip.h"
 
 void InitResource() {
@@ -111,6 +113,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
     // utils::SqlData::constructTestData();
     // void reallyWriteExcel(std::wstring const& fileName, std::wstring const& sheetname, std::wstring const& json);
     // rwe(L"abc", L"xyz", L"[\"id\",\"名称\",\"型号\",\"版本\"]");
+    auto webServer = utils::WebServer("0.0.0.0", 8888, utils::Texts::toNative(utils::Folders::GetCurrentPath()));
     // 初始化
     HRESULT Hr = ::CoInitialize(NULL);
     if (FAILED(Hr)) return 0;

@@ -5,7 +5,10 @@
 #include <iostream>
 #include <memory>
 
+#include <corecrt_io.h> // for _open
 #include <WinSock2.h> // for socket api
+
+#include "Folders.h"
 
 #include "../microhttpd.h"
 
@@ -256,113 +259,121 @@ namespace utils {
     */
 
     namespace {
+        std::wstring getRoot() {
+            static std::wstring result = L"";
+            if (result == L"") {
+                result = Folders::GetCurrentPath();
+            }
+            return result;
+        }
+
         MHD_Result answer_to_connection(void* cls, struct MHD_Connection* connection,
             const char* url,
             const char* method, const char* version,
             const char* upload_data,
             size_t* upload_data_size, void** con_cls) {
-            const char* page = "<html><body>Hello, browser!</body></html>";
-            struct MHD_Response* response;
-            MHD_Result ret;
-
-            response = MHD_create_response_from_buffer(strlen(page),
-                (void*)page, MHD_RESPMEM_PERSISTENT);
-            ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+            std::string* root = (std::string*)cls;
+            // const char* page = "<html><body>Hello, browser!</body></html>";
+            printf_s("url is %s\n", url);
+            uint64_t size = Folders::GetFileSize(L"filename");
+            int flag = 0;
+            int fd = _open("filename", flag);
+            MHD_Response* response = MHD_create_response_from_fd64(size, fd);
+            // MHD_Response* response = MHD_create_response_from_buffer(strlen(page), (void*)page, MHD_RESPMEM_PERSISTENT);
+            MHD_Result ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
             MHD_destroy_response(response);
 
             return ret;
         }
     }
 
-    WebServer::WebServer(std::string const& host, unsigned short port, std::string const& root) {
-        auto t = std::thread([&host, &port, &root] {
-            try {
-                /*
-                auto const address = net::ip::make_address(host);
-                // auto const port = static_cast<unsigned short>(port);
-                auto const doc_root = std::make_shared<std::string>(root);
+    WebServer::WebServer(std::string const& host, unsigned short port, std::string const& root) : root_(root) {
+        //auto t = std::thread([&host, &port, &root] {
+        //    try {
+        //        /*
+        //        auto const address = net::ip::make_address(host);
+        //        // auto const port = static_cast<unsigned short>(port);
+        //        auto const doc_root = std::make_shared<std::string>(root);
 
-                // The io_context is required for all I/O
-                net::io_context ioc{ 1 };
+        //        // The io_context is required for all I/O
+        //        net::io_context ioc{ 1 };
 
-                // The acceptor receives incoming connections
-                tcp::acceptor acceptor{ ioc, {address, port} };
-                for (;;) {
-                    // This will receive the new connection
-                    tcp::socket socket{ ioc };
+        //        // The acceptor receives incoming connections
+        //        tcp::acceptor acceptor{ ioc, {address, port} };
+        //        for (;;) {
+        //            // This will receive the new connection
+        //            tcp::socket socket{ ioc };
 
-                    // Block until we get a connection
-                    acceptor.accept(socket);
+        //            // Block until we get a connection
+        //            acceptor.accept(socket);
 
-                    // Launch the session, transferring ownership of the socket
-                    // std::thread{ std::bind(&do_session, std::move(socket), doc_root) }.detach();
-                }
-                */
-                /*
-                // Create a socket (IPv4, TCP)
-                SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
-                if (sockfd == -1) {
-                    std::cout << "Failed to create socket. errno: " << errno << std::endl;
-                    exit(EXIT_FAILURE);
-                }
+        //            // Launch the session, transferring ownership of the socket
+        //            // std::thread{ std::bind(&do_session, std::move(socket), doc_root) }.detach();
+        //        }
+        //        */
+        //        /*
+        //        // Create a socket (IPv4, TCP)
+        //        SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        //        if (sockfd == -1) {
+        //            std::cout << "Failed to create socket. errno: " << errno << std::endl;
+        //            exit(EXIT_FAILURE);
+        //        }
 
-                // Listen to port 9999 on any address
-                sockaddr_in sockaddr;
-                sockaddr.sin_family = AF_INET;
-                sockaddr.sin_addr.s_addr = INADDR_ANY;
-                sockaddr.sin_port = htons(9999); // htons is necessary to convert a number to
-                                                 // network byte order
-                if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
-                    std::cout << "Failed to bind to port 9999. errno: " << errno << std::endl;
-                    exit(EXIT_FAILURE);
-                }
+        //        // Listen to port 9999 on any address
+        //        sockaddr_in sockaddr;
+        //        sockaddr.sin_family = AF_INET;
+        //        sockaddr.sin_addr.s_addr = INADDR_ANY;
+        //        sockaddr.sin_port = htons(9999); // htons is necessary to convert a number to
+        //                                         // network byte order
+        //        if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
+        //            std::cout << "Failed to bind to port 9999. errno: " << errno << std::endl;
+        //            exit(EXIT_FAILURE);
+        //        }
 
-                // Start listening. Hold at most 10 connections in the queue
-                if (listen(sockfd, 10) < 0) {
-                    std::cout << "Failed to listen on socket. errno: " << errno << std::endl;
-                    exit(EXIT_FAILURE);
-                }
+        //        // Start listening. Hold at most 10 connections in the queue
+        //        if (listen(sockfd, 10) < 0) {
+        //            std::cout << "Failed to listen on socket. errno: " << errno << std::endl;
+        //            exit(EXIT_FAILURE);
+        //        }
 
-                // Grab a connection from the queue
-                auto addrlen = sizeof(sockaddr);
-                // int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
-                SOCKET connection = accept(sockfd, (struct sockaddr*)&sockaddr, (int*)&addrlen);
-                if (connection < 0) {
-                    std::cout << "Failed to grab connection. errno: " << errno << std::endl;
-                    exit(EXIT_FAILURE);
-                }
+        //        // Grab a connection from the queue
+        //        auto addrlen = sizeof(sockaddr);
+        //        // int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
+        //        SOCKET connection = accept(sockfd, (struct sockaddr*)&sockaddr, (int*)&addrlen);
+        //        if (connection < 0) {
+        //            std::cout << "Failed to grab connection. errno: " << errno << std::endl;
+        //            exit(EXIT_FAILURE);
+        //        }
 
-                // Read from the connection
-                char buffer[100];
-                auto bytesRead = recv(connection, buffer, 100, 0);
-                std::cout << "The message was: " << buffer;
+        //        // Read from the connection
+        //        char buffer[100];
+        //        auto bytesRead = recv(connection, buffer, 100, 0);
+        //        std::cout << "The message was: " << buffer;
 
-                // Send a message to the connection
-                std::string response = "Good talking to you\n";
-                send(connection, response.c_str(), response.size(), 0);
+        //        // Send a message to the connection
+        //        std::string response = "Good talking to you\n";
+        //        send(connection, response.c_str(), response.size(), 0);
 
-                // Close the connections
-                closesocket(connection);
-                closesocket(sockfd);
-                */
-            } catch (const std::exception& e) {
-                std::cerr << "Error: " << e.what() << std::endl;
-                return EXIT_FAILURE;
-            }
-        });
-        t.detach();
+        //        // Close the connections
+        //        closesocket(connection);
+        //        closesocket(sockfd);
+        //        */
+        //    } catch (const std::exception& e) {
+        //        std::cerr << "Error: " << e.what() << std::endl;
+        //        return EXIT_FAILURE;
+        //    }
+        //});
+        //t.detach();
 
-        struct MHD_Daemon* daemon;
-
-        daemon = MHD_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, port, NULL, NULL,
-            &answer_to_connection, NULL, MHD_OPTION_END);
+        MHD_Daemon* daemon = MHD_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, htons(port), NULL, NULL,
+            &answer_to_connection, (void*)&root, MHD_OPTION_END);
         if (NULL == daemon) {
             // return 1;
         }
+        fprintf(stderr, "listen to %d\nroot is %s", port, root_.c_str());
         getchar();
 
         MHD_stop_daemon(daemon);
         // return 0;
-
     }
 }
