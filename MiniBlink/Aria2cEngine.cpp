@@ -88,7 +88,7 @@ void CAria2cEngine::StartDownload(std::string strUrl) {
 
 bool CAria2cEngine::Remove(CDuiString szGid) {
     std::string strSend;
-    CHAR szSend[512];
+    char szSend[512];
     sprintf_s(szSend, 512, "{\"jsonrpc\":\"2.0\", \"id\":\"qwer\",\"method\":\"aria2.remove\",\"params\":[\"token:123\",\"%s\"]}", szGid.GetData());
     client.sendTextMessage(szSend);
     return false;
@@ -96,7 +96,7 @@ bool CAria2cEngine::Remove(CDuiString szGid) {
 
 bool CAria2cEngine::pause(CDuiString szGid) {
     std::string strSend;
-    CHAR  szSend[512];
+    char szSend[512];
     sprintf_s(szSend, 512, "{\"jsonrpc\":\"2.0\", \"id\":\"qwer\",\"method\":\"aria2.pause\",\"params\":[\"token:123\",\"%s\"]}", szGid.GetData());
     client.sendTextMessage(szSend);
     return false;
@@ -104,7 +104,7 @@ bool CAria2cEngine::pause(CDuiString szGid) {
 
 bool CAria2cEngine::unpause(CDuiString szGid) {
     std::string strSend;
-    CHAR  szSend[512];
+    char szSend[512];
     sprintf_s(szSend, 512, "{\"jsonrpc\":\"2.0\", \"id\":\"qwer\",\"method\":\"aria2.unpause\",\"params\":[\"token:123\",\"%s\"]}", szGid.GetData());
     client.sendTextMessage(szSend);
     return false;

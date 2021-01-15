@@ -999,13 +999,13 @@ namespace {
         map<int, int> configurationIdMaps;
         for (auto& configuration : data["configurations"]) {
             configuration[u8"基线id"] = baselineId;
-            int oldId = configuration["id"].get<std::int64_t>();
+            long oldId = configuration["id"].get<std::int64_t>();
             configuration.erase("id");
             if (configuration.contains("parent_id") && !configuration["parent_id"].is_null()) {
-                int oldParentId = configuration["parent_id"].get<std::int64_t>();
+                long oldParentId = configuration["parent_id"].get<std::int64_t>();
                 configuration["parent_id"] = configurationIdMaps[oldParentId];
             }
-            int newId = utils::SqlData::insert(L"构型", configuration);
+            long newId = utils::SqlData::insert(L"构型", configuration);
             configurationIdMaps.insert(std::make_pair(oldId, newId));
         }
         for (auto& auxiliary : data["auxiliaries"]) {

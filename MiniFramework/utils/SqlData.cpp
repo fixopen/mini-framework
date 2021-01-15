@@ -673,9 +673,9 @@ namespace utils::SqlData {
         return result;
     }
 
-    int insert(std::wstring const& tableName, nlohmann::json const& data) {
+    long insert(std::wstring const& tableName, nlohmann::json const& data) {
         // Log::log(data.dump());
-        int id = 0;
+        long id = 0;
         auto const& columnInfos = getColumns(tableName);
         if (!columnInfos.empty()) {
             std::wstring valueList = L"";
@@ -693,7 +693,7 @@ namespace utils::SqlData {
                         valueList += v.value();
                         // Log::log(L"value: " + v.value());
                         if (column.name == L"id") {
-                            id = std::stoi(v.value());
+                            id = std::stol(v.value());
                         }
                     } else {
                         valueList += L"NULL";
@@ -961,7 +961,7 @@ namespace utils::SqlData {
     }
 
     void constructTestData() {
-        srand(time(nullptr));
+        srand((unsigned int)time(nullptr));
         // 64 baseline
         for (int i = 0; i < 2; ++i) {
             // create (2) model

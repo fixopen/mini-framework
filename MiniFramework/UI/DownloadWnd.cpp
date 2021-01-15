@@ -168,7 +168,7 @@ void CDownloadWnd::AddDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
         if (pFileNameLabel != NULL) pFileNameLabel->SetText(stTaskInfo.szFilename);
 
         CProgressUI* pPro1 = static_cast<CProgressUI*>(pListItem->FindSubControl(_T("downprogress")));
-        pPro1->SetValue(stTaskInfo.fPercent * 100);
+        pPro1->SetValue((int)(stTaskInfo.fPercent * 100));
 
         TCHAR szSizeInfo[16] = {0};
         _stprintf_s(szSizeInfo, 16, TEXT("%I64d/%I64d"), stTaskInfo.nTotalDownload, stTaskInfo.nTotalSize);
@@ -182,7 +182,7 @@ void CDownloadWnd::AddDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
 
         int sec = 0;
         if (stTaskInfo.nSpeed > 0) {
-            sec = (stTaskInfo.nTotalSize - stTaskInfo.nTotalDownload) / stTaskInfo.nSpeed;
+            sec = (int)((stTaskInfo.nTotalSize - stTaskInfo.nTotalDownload) / stTaskInfo.nSpeed);
         }
 
         int h = sec / 3600;
@@ -207,7 +207,7 @@ void CDownloadWnd::UpdateDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
             CControlUI* pLabel = pListElement->FindSubControl(_T("NumberLaber"));
             if (pLabel != NULL && pLabel->GetText().CompareNoCase(std::to_wstring((int) hTask).c_str()) == 0) {
                 CProgressUI* pPro1 = static_cast<CProgressUI*>(pListElement->FindSubControl(_T("downprogress")));
-                pPro1->SetValue(stTaskInfo.fPercent * 100);
+                pPro1->SetValue((int)(stTaskInfo.fPercent * 100));
 
                 CControlUI* pFileNameLabel = pListElement->FindSubControl(_T("downFileNameLabel"));
                 if (pFileNameLabel != NULL) pFileNameLabel->SetText(stTaskInfo.szFilename);
@@ -216,15 +216,15 @@ void CDownloadWnd::UpdateDownloadItem(HANDLE hTask, DownTaskInfo stTaskInfo) {
                 if (pStyleBtn != NULL) pStyleBtn->SetText(m_mapStates[stTaskInfo.stat]);
 
                 TCHAR szSizeInfo[64] = {0};
-                int nTotalSize = stTaskInfo.nTotalSize / 1024 / 1024;
-                int nTotalDownload = stTaskInfo.nTotalDownload / 1024 / 1024;
+                int nTotalSize = (int)(stTaskInfo.nTotalSize / 1024 / 1024);
+                int nTotalDownload = (int)(stTaskInfo.nTotalDownload / 1024 / 1024);
                 _stprintf_s(szSizeInfo, 64, TEXT("%d M/%d M"), nTotalDownload, nTotalSize);
                 CControlUI* pSizeInfoLabel = pListElement->FindSubControl(_T("sizeInfoLabel"));
                 if (pSizeInfoLabel != NULL) pSizeInfoLabel->SetText(szSizeInfo);
 
                 int sec = 0;
                 if (stTaskInfo.nSpeed > 0) {
-                    sec = (stTaskInfo.nTotalSize - stTaskInfo.nTotalDownload) / stTaskInfo.nSpeed;
+                    sec = int((stTaskInfo.nTotalSize - stTaskInfo.nTotalDownload) / stTaskInfo.nSpeed);
                 }
 
                 int h = sec / 3600;

@@ -47,12 +47,12 @@ bool Block::Open(const wchar_t* filename, ios_base::openmode mode)
 	if (mode & ios_base::in)
 	{
 		file_.seekg(0, ios_base::end);
-		fileSize_ = file_.tellg();
+		fileSize_ = size_t(file_.tellg());
 	}
 	else if (mode & ios_base::out)
 	{
 		file_.seekp(0, ios_base::end);
-		fileSize_ = file_.tellp();
+		fileSize_ = size_t(file_.tellp());
 	}
 	else
 	{

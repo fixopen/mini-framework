@@ -175,7 +175,7 @@ namespace utils {
             fireEvent(eMouseMove, context);
         }
 
-        Point const& GetPosition() {
+        Point GetPosition() {
             return Point(position_.x(), position_.y());
         }
 

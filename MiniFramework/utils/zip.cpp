@@ -178,7 +178,7 @@ namespace utils::zip {
                     std::vector<std::wstring> parts = Folders::splitPath(pathName);
                     if (parts.size() > 1) {
                         std::wstring path;
-                        for (int i = 0; i < parts.size() - 1; ++i) {
+                        for (size_t i = 0; i < parts.size() - 1; ++i) {
                             path += L"\\" + parts[i];
                             if (!Folders::IsDirectoryExist(folder + path)) {
                                 Folders::MakeDir(folder + path);

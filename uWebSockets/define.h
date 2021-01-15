@@ -1,10 +1,12 @@
 #pragma once
 
-#ifdef   UWBESOCKET_EXPORT
-#define UWBESOCKET_EXPORTIMPL __declspec(dllexport)
-#else
-#define UWBESOCKET_EXPORTIMPL __declspec(dllimport)
-#endif
+//#ifdef   UWBESOCKET_EXPORT
+//#define UWBESOCKET_EXPORTIMPL __declspec(dllexport)
+//#else
+//#define UWBESOCKET_EXPORTIMPL __declspec(dllimport)
+//#endif
+
+#define UWBESOCKET_EXPORTIMPL
 
 #include <string>
 #include <mutex>

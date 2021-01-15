@@ -84,7 +84,7 @@ namespace utils::Process {
 
         void SendText(char *text) {
             auto len = strlen(text);
-            for (int i = 0; i < len; i++) {
+            for (size_t i = 0; i < len; i++) {
                 SendChar(text[i]);
             }
         }

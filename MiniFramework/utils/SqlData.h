@@ -252,7 +252,7 @@ namespace utils::SqlData {
     void fillBlob(std::wstring const& tableName, int id, std::wstring const& columnName, void const* data, int size);
 
     std::wstring query(std::wstring const& tableName, std::wstring const& whereCause, std::wstring const& orderBy);
-    int insert(std::wstring const& tableName, nlohmann::json const& data);
+    long insert(std::wstring const& tableName, nlohmann::json const& data);
     void update(std::wstring const& tableName, nlohmann::json const& data);
     void remove(std::wstring const& tableName, int id);
 
