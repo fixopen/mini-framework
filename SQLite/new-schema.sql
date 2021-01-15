@@ -420,6 +420,9 @@ CREATE TABLE organizations (
     description text
 );
 
+INSERT INTO organizations (id, parent_id, no, name, type, address, telephone, contact, manager_id, description) VALUES
+(1, NULL, NULL, '航空兵所', 0, NULL, NULL, NULL, NULL, NULL);
+
 CREATE TABLE users (
     id integer PRIMARY KEY,
     login_name text,
@@ -435,6 +438,11 @@ CREATE TABLE users (
     role text,
     description text
 );
+
+INSERT INTO users (id, login_name, name, sex, birthday, organization_id, address, telephone, email, website, password, role, description) VALUES
+(1, 'admin', NULL, '0', NULL, '1', NULL, NULL, NULL, NULL, 'admin123', '管理员', NULL);
+
+UPDATE organizations SET manager_id = 1 WHERE id = 1;
 
 CREATE TABLE logs (
     id integer PRIMARY KEY,
