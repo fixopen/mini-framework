@@ -1,0 +1,234 @@
+[
+    {
+        "description": "单行文本",
+        "id": 1,
+        "name": "文本",
+        "no": 1,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "可换行文本",
+        "id": 2,
+        "name": "长文本",
+        "no": 2,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "整数或者实数、可以规定小数位数",
+        "id": 3,
+        "name": "数字",
+        "no": 3,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "整数",
+        "id": 4,
+        "name": "整数",
+        "no": 4,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "实数",
+        "id": 5,
+        "name": "实数",
+        "no": 5,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "年月日",
+        "id": 6,
+        "name": "日期",
+        "no": 6,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "时分秒",
+        "id": 7,
+        "name": "时间",
+        "no": 7,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "二进制内容",
+        "id": 8,
+        "name": "数据对象",
+        "no": 8,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "图片内容",
+        "id": 9,
+        "name": "图片",
+        "no": 9,
+        "template_id": null,
+        "type": 0
+    },
+    {
+        "description": "所有的单位",
+        "id": 10,
+        "name": "organizations",
+        "no": 65,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "所有的用户",
+        "id": 11,
+        "name": "users",
+        "no": 66,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "所有的机型",
+        "id": 12,
+        "name": "models",
+        "no": 67,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "所有的状态",
+        "id": 13,
+        "name": "states",
+        "no": 68,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "所有的批次",
+        "id": 14,
+        "name": "batchs",
+        "no": 69,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "所有的飞机",
+        "id": 15,
+        "name": "airs",
+        "no": 70,
+        "template_id": null,
+        "type": 3
+    },
+    {
+        "description": "单位的属性",
+        "id": 16,
+        "name": "organizations项类型",
+        "no": 129,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": "用户的属性",
+        "id": 17,
+        "name": "users项类型",
+        "no": 130,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": "机型的属性",
+        "id": 18,
+        "name": "models项类型",
+        "no": 131,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": "状态的属性",
+        "id": 19,
+        "name": "states项类型",
+        "no": 132,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": "批次的属性",
+        "id": 20,
+        "name": "batchs项类型",
+        "no": 133,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": "飞机的属性",
+        "id": 21,
+        "name": "airs项类型",
+        "no": 134,
+        "template_id": null,
+        "type": 2
+    },
+    {
+        "description": null,
+        "id": 22,
+        "name": "types__type",
+        "no": 257,
+        "template_id": null,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 23,
+        "name": "info_configs__type",
+        "no": 258,
+        "template_id": null,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 24,
+        "name": "schemas__is_required",
+        "no": 259,
+        "template_id": null,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 25,
+        "name": "schemas__is_hidden",
+        "no": 260,
+        "template_id": null,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 26,
+        "name": "baselines__object_type",
+        "no": 261,
+        "template_id": null,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 27,
+        "name": "organizations__type",
+        "no": 262,
+        "template_id": 1,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 28,
+        "name": "users__sex",
+        "no": 263,
+        "template_id": 1,
+        "type": 1
+    },
+    {
+        "description": null,
+        "id": 29,
+        "name": "models__type",
+        "no": 264,
+        "template_id": 1,
+        "type": 1
+    }
+]
