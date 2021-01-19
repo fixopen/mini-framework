@@ -247,16 +247,16 @@ namespace utils::SqlData {
 
     std::wstring constructColumnList(std::vector<ColumnMeta> const& columns);
 
-    std::string readBlob(std::wstring const& tableName, int id, std::wstring const& columnName);
+    std::string readBlob(std::wstring const& tableName, std::int64_t id, std::wstring const& columnName);
 
-    void fillBlob(std::wstring const& tableName, int id, std::wstring const& columnName, void const* data, int size);
+    void fillBlob(std::wstring const& tableName, std::int64_t id, std::wstring const& columnName, void const* data, int size);
 
     std::wstring query(std::wstring const& tableName, std::wstring const& whereCause, std::wstring const& orderBy);
-    long insert(std::wstring const& tableName, nlohmann::json const& data);
+    std::int64_t insert(std::wstring const& tableName, nlohmann::json const& data);
     void update(std::wstring const& tableName, nlohmann::json const& data);
     void remove(std::wstring const& tableName, int id);
 
-    long getLastId();
+    std::int64_t getLastId();
 
     int backup(std::wstring const& name);
     int restore(std::wstring const& name);

@@ -34,28 +34,49 @@ INSERT INTO types (id, no, template_id, name, type, description) VALUES
 (NULL, 8, NULL, '数据对象', 0, '二进制内容'),
 (NULL, 9, NULL, '图片', 0, '图片内容'),
 
--- type of type
--- type of info_config
--- is_hidden of schema
--- object_type of baseline
+(NULL, 65, NULL, 'properties', 3, '所有的配置'),
+(NULL, 66, NULL, 'templates', 3, '所有的模板'),
+(NULL, 67, NULL, 'types', 3, '所有的类型'),
+(NULL, 68, NULL, 'restrictions', 3, '所有的限制'),
+(NULL, 69, NULL, 'unit_types', 3, '所有的单位范畴'),
+(NULL, 70, NULL, 'units', 3, '所有的单位'),
+(NULL, 71, NULL, 'info_configs', 3, '所有的信息组织'),
+(NULL, 72, NULL, 'codes', 3, '所有的枚举'),
+(NULL, 73, NULL, 'schemas', 3, '所有的复合'),
+(NULL, 74, NULL, 'lists', 3, '所有的列表'),
+(NULL, 75, NULL, 'baselines', 3, '所有的基线'),
+(NULL, 76, NULL, 'data', 3, '所有的数据'),
+(NULL, 77, NULL, 'files', 3, '所有的文件'),
+(NULL, 78, NULL, 'organizations', 3, '所有的组织'),
+(NULL, 79, NULL, 'users', 3, '所有的用户'),
+(NULL, 80, NULL, 'logs', 3, '所有的日志'),
+(NULL, 81, NULL, 'models', 3, '所有的机型'),
+(NULL, 82, NULL, 'states', 3, '所有的状态'),
+(NULL, 83, NULL, 'batchs', 3, '所有的批次'),
+(NULL, 84, NULL, 'airs', 3, '所有的飞机'),
+(NULL, 85, NULL, 'histories', 3, '所有的变更'),
 
--- type of organization
--- sex of user
--- type of model
-
-(NULL, 65, NULL, 'organizations', 3, '所有的单位'),
-(NULL, 66, NULL, 'users', 3, '所有的用户'),
-(NULL, 67, NULL, 'models', 3, '所有的机型'),
-(NULL, 68, NULL, 'states', 3, '所有的状态'),
-(NULL, 69, NULL, 'batchs', 3, '所有的批次'),
-(NULL, 70, NULL, 'airs', 3, '所有的飞机'),
-
-(NULL, 129, NULL, 'organizations项类型', 2, '单位的属性'),
-(NULL, 130, NULL, 'users项类型', 2, '用户的属性'),
-(NULL, 131, NULL, 'models项类型', 2, '机型的属性'),
-(NULL, 132, NULL, 'states项类型', 2, '状态的属性'),
-(NULL, 133, NULL, 'batchs项类型', 2, '批次的属性'),
-(NULL, 134, NULL, 'airs项类型', 2, '飞机的属性'),
+(NULL, 129, NULL, 'properties项类型', 3, '配置的属性'),
+(NULL, 120, NULL, 'templates项类型', 3, '模板的属性'),
+(NULL, 131, NULL, 'types项类型', 3, '类型的属性'),
+(NULL, 132, NULL, 'restrictions项类型', 3, '限制的属性'),
+(NULL, 133, NULL, 'unit_types项类型', 3, '单位范畴的属性'),
+(NULL, 134, NULL, 'units项类型', 3, '单位的属性'),
+(NULL, 135, NULL, 'info_configs项类型', 3, '信息组织的属性'),
+(NULL, 136, NULL, 'codes项类型', 3, '枚举的属性'),
+(NULL, 137, NULL, 'schemas项类型', 3, '复合的属性'),
+(NULL, 138, NULL, 'lists项类型', 3, '列表的属性'),
+(NULL, 139, NULL, 'baselines项类型', 3, '基线的属性'),
+(NULL, 140, NULL, 'data项类型', 3, '数据的属性'),
+(NULL, 141, NULL, 'files项类型', 3, '文件的属性'),
+(NULL, 142, NULL, 'organizations项类型', 2, '单位的属性'),
+(NULL, 143, NULL, 'users项类型', 2, '用户的属性'),
+(NULL, 144, NULL, 'logs项类型', 2, '日志的属性'),
+(NULL, 145, NULL, 'models项类型', 2, '机型的属性'),
+(NULL, 146, NULL, 'states项类型', 2, '状态的属性'),
+(NULL, 147, NULL, 'batchs项类型', 2, '批次的属性'),
+(NULL, 148, NULL, 'airs项类型', 2, '飞机的属性'),
+(NULL, 149, NULL, 'histories项类型', 2, '变更的属性'),
 
 (NULL, 257, NULL, 'types__type', 1, NULL),
 (NULL, 258, NULL, 'info_configs__type', 1, NULL),
@@ -235,6 +256,7 @@ CREATE TABLE info_configs (
     no integer,
     name text,
     type_no integer, -- REFERENCES types (no)
+    reference_to integer REFERENCES info_configs (id),
     restriction_id integer REFERENCES restrictions (id),
     unit_id integer REFERENCES units (id)
 );
@@ -298,87 +320,219 @@ CREATE TABLE schemas (
 );
 
 INSERT INTO schemas (id, template_id, parent_no, no, name, title, is_hidden, type_no, is_required, restriction_id, unit_id, description) VALUES
+-- property
 (NULL, NULL, 129, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 129, 1, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 2, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 3, 'type', '类型', 1, 262, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 4, 'address', '地址', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 5, 'telephone', '电话', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 6, 'contact', '联系人', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 129, 7, 'manager_id', '管理员id', 1, 66, 0, NULL, NULL, '{"value": "id", "show": "姓名", "filter": "\"组织id\" = id"}'),
-(NULL, NULL, 129, 8, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
-
+(NULL, NULL, 129, 1, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 129, 2, 'value', '值', 0, 2, 0, NULL, NULL, NULL),
+-- template
 (NULL, NULL, 130, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 130, 1, 'login_name', '登录名', 1, 1, 1, NULL, NULL, NULL),
-(NULL, NULL, 130, 2, 'name', '姓名', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 3, 'sex', '性别', 1, 263, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 4, 'birthday', '生日', 1, 6, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 5, 'organization_id', '组织id', 1, 65, 0, NULL, NULL, '{"value": "id", "show": "名称"}'),
-(NULL, NULL, 130, 6, 'address', '住址', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 7, 'telephone', '电话', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 8, 'email', '电子邮箱', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 9, 'website', '网站', 1, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 10, 'password', '密码', 1, 1, 1, NULL, NULL, NULL),
-(NULL, NULL, 130, 11, 'role', '角色', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 130, 12, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
-
+(NULL, NULL, 130, 1, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 130, 2, 'state', '状态', 1, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 130, 3, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- type
 (NULL, NULL, 131, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 131, 1, 'template_id', '模板id', 1, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 131, 2, 'type', '类型', 0, 264, 0, NULL, NULL, NULL),
-(NULL, NULL, 131, 3, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 131, 4, 'factory_id', '工厂id', 0, 65, 0, NULL, NULL, '{"value": "id", "show": "名称", "filter": "\"类型\" = 1"}'),
-(NULL, NULL, 131, 5, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 131, 6, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
-
+(NULL, NULL, 131, 1, 'no', '编号', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 131, 2, 'template_id', '模板id', 1, 66, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 131, 3, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 131, 4, 'type', '类型', 0, 257, 1, NULL, NULL, NULL),
+(NULL, NULL, 131, 5, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
+-- restriction
 (NULL, NULL, 132, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 132, 1, 'model_id', '机型id', 1, 67, 0, NULL, NULL, '{"value": "id", "show": "名称"}'),
-(NULL, NULL, 132, 2, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 3, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 4, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
-
+(NULL, NULL, 132, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 132, 2, 'length', '长度', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 3, 'precision', '精度', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 4, 'min', '最小值', 0, 5, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 5, 'max', '最大值', 1, 5, 0, NULL, NULL, NULL),
+-- unit_type
 (NULL, NULL, 133, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 133, 1, 'state_id', '状态id', 1, 68, 0, NULL, NULL, '{"value": "id", "show": "编号"}'),
-(NULL, NULL, 133, 2, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 133, 3, 'air_no_range', '飞机编号范围', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 133, 4, 'engine_no_range', '发动机编号范围', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 133, 5, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 133, 6, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
-
+(NULL, NULL, 133, 1, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 133, 2, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- unit
 (NULL, NULL, 134, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
-(NULL, NULL, 134, 1, 'batch_id', '批次id', 1, 69, 0, NULL, NULL, '{"value": "id", "show": "编号"}'),
-(NULL, NULL, 134, 2, 'tag', 'tag', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 3, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 4, 'factory_id', '承制单位id', 0, 65, 0, NULL, NULL, '{"value": "id", "show": "名称", "filter": "\"类型\" = 1"}'),
-(NULL, NULL, 134, 5, 'user_id', '接装单位id', 1, 65, 0, NULL, NULL, '{"value": "id", "show": "名称", "filter": "\"类型\" = 2"}'),
-(NULL, NULL, 134, 6, 'offer_time', '移交时间', 0, 6, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 7, 'offer_no', '移交编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 8, 'lifespan', '使用寿命', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 9, 'residue_span', '剩余寿命', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 10, 'engine_model', '引擎型号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 11, 'engine_no', '引擎编号', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 12, 'engine_lifespan', '引擎使用寿命', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 13, 'engine_residue_span', '引擎剩余寿命', 0, 1, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 14, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 134, 15, 'description', '备注', 0, 2, 0, NULL, NULL, NULL);
+(NULL, NULL, 134, 1, 'type_id', '范畴id', 1, 69, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 134, 2, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 134, 3, 'symbol', '符号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 134, 4, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- info_config
+(NULL, NULL, 135, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 135, 1, 'template_id', '模板id', 1, 4, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 135, 2, 'parent_id', '父id', 0, 71, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 135, 3, 'type', '类型', 0, 258, 1, NULL, NULL, NULL),
+(NULL, NULL, 135, 4, 'no', '序号', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 135, 5, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 135, 6, 'type_no', '类型编号', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 135, 7, 'reference_to', '引用到', 0, 71, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 135, 8, 'restriction_id', '限制id', 0, 68, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 135, 9, 'unit_id', '单位id', 0, 70, 0, NULL, NULL, '{"value": "id", "show": "symbol"}'),
+-- code
+(NULL, NULL, 136, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 136, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 136, 2, 'parent_no', '父编号', 1, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 136, 3, 'no', '序号', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 136, 4, 'value', '值', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 136, 5, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
+-- schema
+(NULL, NULL, 137, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 137, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 137, 2, 'parent_no', '父编号', 1, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 137, 3, 'no', '序号', 1, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 137, 4, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 137, 5, 'title', '标题', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 137, 6, 'is_hidden', '隐藏', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 137, 7, 'type_no', '类型编号', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 137, 8, 'is_required', '必填', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 137, 9, 'restriction_id', '限制id', 0, 68, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 137, 10, 'unit_id', '单位id', 0, 70, 0, NULL, NULL, '{"value": "id", "show": "symbol"}'),
+(NULL, NULL, 137, 11, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
+-- list
+(NULL, NULL, 138, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 138, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 138, 2, 'parent_no', '父编号', 1, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 138, 3, 'element_type_no', '元素类型编号', 0, 4, 1, NULL, NULL, NULL),
+(NULL, NULL, 138, 4, 'tree_show_column_no', '树显示列序号', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 138, 5, 'min', '最小行数', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 138, 6, 'max', '最大行数', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 138, 7, 'group_by', '分组列', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 138, 8, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
+-- baseline
+(NULL, NULL, 139, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 139, 1, 'object_type', '适用目标', 1, 261, 0, NULL, NULL, NULL),
+(NULL, NULL, 139, 2, 'object_id', '目标id', 1, 4, 0, NULL, NULL, '批次或单机的id'),
+(NULL, NULL, 139, 3, 'previous_version_id', '前一版本id', 1, 75, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+-- data
+(NULL, NULL, 140, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 140, 1, 'info_config_id', '信息配置id', 71, 1, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 140, 2, 'baseline_id', '基线id', 0, 75, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 140, 3, 'parent_id', '父id', 0, 76, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 140, 4, 'ref_id', '引用id', 0, 76, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 140, 5, 'serial_no', '序号', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 140, 6, 'data', '数据', 0, 2, 0, NULL, NULL, NULL),
+-- file
+(NULL, NULL, 141, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 141, 1, 'type', 'mime-type', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 141, 2, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 141, 3, 'ext', '扩展名', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 141, 4, 'content', '内容', 0, 8, 0, NULL, NULL, NULL),
+(NULL, NULL, 141, 5, 'size', '文件大小', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 141, 6, 'digest', '内容摘要', 0, 1, 0, NULL, NULL, NULL),
+-- organization
+(NULL, NULL, 142, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 142, 1, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 2, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 3, 'type', '类型', 1, 262, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 4, 'address', '地址', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 5, 'telephone', '电话', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 6, 'contact', '联系人', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 142, 7, 'manager_id', '管理员id', 1, 79, 0, NULL, NULL, '{"value": "id", "show": "name", "filter": "\"organization_id\" = id"}'),
+(NULL, NULL, 142, 8, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
+-- user
+(NULL, NULL, 143, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 143, 1, 'login_name', '登录名', 1, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 143, 2, 'name', '姓名', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 3, 'sex', '性别', 1, 263, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 4, 'birthday', '生日', 1, 6, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 5, 'organization_id', '组织id', 1, 78, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 143, 6, 'address', '住址', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 7, 'telephone', '电话', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 8, 'email', '电子邮箱', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 9, 'website', '网站', 1, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 10, 'password', '密码', 1, 1, 1, NULL, NULL, NULL),
+(NULL, NULL, 143, 11, 'role', '角色', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 143, 12, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- log
+(NULL, NULL, 144, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 144, 1, 'time', '时间', 1, 6, 0, NULL, NULL, NULL),
+(NULL, NULL, 144, 2, 'operator_id', '操作人id', 0, 79, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 144, 3, 'data_type', '数据类型', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 144, 4, 'data_item', '数据项', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 144, 5, 'action', '动作', 1, 2, 0, NULL, NULL, NULL),
+(NULL, NULL, 144, 6, 'abstract', '摘要', 1, 2, 0, NULL, NULL, NULL),
+(NULL, NULL, 144, 7, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- model
+(NULL, NULL, 145, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 145, 1, 'template_id', '模板id', 1, 66, 0, NULL, NULL, NULL),
+(NULL, NULL, 145, 2, 'type', '类型', 0, 264, 0, NULL, NULL, NULL),
+(NULL, NULL, 145, 3, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 145, 4, 'factory_id', '工厂id', 0, 78, 0, NULL, NULL, '{"value": "id", "show": "name", "filter": "\"type\" = 1"}'),
+(NULL, NULL, 145, 5, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 145, 6, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- state
+(NULL, NULL, 146, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 146, 1, 'model_id', '机型id', 1, 81, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 146, 2, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 146, 3, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 146, 4, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- batch
+(NULL, NULL, 147, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 147, 1, 'state_id', '状态id', 1, 82, 0, NULL, NULL, '{"value": "id", "show": "no"}'),
+(NULL, NULL, 147, 2, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 147, 3, 'air_no_range', '飞机编号范围', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 147, 4, 'engine_no_range', '发动机编号范围', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 147, 5, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 147, 6, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- air
+(NULL, NULL, 148, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 149, 1, 'batch_id', '批次id', 1, 83, 0, NULL, NULL, '{"value": "id", "show": "no"}'),
+(NULL, NULL, 148, 2, 'tag', 'tag', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 3, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 4, 'factory_id', '承制单位id', 0, 81, 0, NULL, NULL, '{"value": "id", "show": "name", "filter": "\"type\" = 1"}'),
+(NULL, NULL, 148, 5, 'user_id', '接装单位id', 1, 81, 0, NULL, NULL, '{"value": "id", "show": "name", "filter": "\"type\" = 2"}'),
+(NULL, NULL, 148, 6, 'offer_time', '移交时间', 0, 6, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 7, 'offer_no', '移交编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 8, 'lifespan', '使用寿命', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 9, 'residue_span', '剩余寿命', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 10, 'engine_model', '引擎型号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 11, 'engine_no', '引擎编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 12, 'engine_lifespan', '引擎使用寿命', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 13, 'engine_residue_span', '引擎剩余寿命', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 14, 'state', '状态', 1, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 148, 15, 'description', '备注', 0, 2, 0, NULL, NULL, NULL),
+-- history
+(NULL, NULL, 149, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
+(NULL, NULL, 149, 1, 'baseline_id', '基线id', 1, 75, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
+(NULL, NULL, 149, 2, 'name', '名称', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 3, 'no', '编号', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 4, 'object', '对象', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 5, 'abstract', '摘要说明', 1, 2, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 6, 'operator', '经手人', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 7, 'time', '时间', 0, 1, 0, NULL, NULL, NULL),
+(NULL, NULL, 149, 8, 'control_file_id', '控制文件id', 0, 1, 0, NULL, NULL,  '{"value": "id", "show": "name"}'),
+(NULL, NULL, 149, 15, 'description', '备注', 0, 2, 0, NULL, NULL, NULL);
 
 CREATE TABLE lists (
     id integer PRIMARY KEY,
     template_id integer REFERENCES templates (id),
     parent_no integer, -- REFERENCES types (no),
     element_type_no integer, -- REFERENCES types (no),
+    tree_show_column_no integer, -- -1: not tree, 0..maxColumn: treeShowColumnNo
     min integer, -- 0
     max integer, -- -1无穷 if (最少==最多) then 列表定长
     group_by text, -- column-name
     description text
 );
 
-INSERT INTO lists (id, template_id, parent_no, element_type_no, min, max, group_by, description) VALUES
-(NULL, NULL, 65, 129, 0, -1, 'type', NULL),
-(NULL, NULL, 66, 130, 0, -1, NULL, NULL),
-(NULL, NULL, 67, 131, 0, -1, NULL, NULL),
-(NULL, NULL, 68, 132, 0, -1, NULL, NULL),
-(NULL, NULL, 69, 133, 0, -1, NULL, NULL),
-(NULL, NULL, 70, 134, 0, -1, 'tag', NULL);
+INSERT INTO lists (id, template_id, parent_no, element_type_no, tree_show_column_no, min, max, group_by, description) VALUES
+(NULL, NULL, 65, 129, NULL, 0, -1, NULL, NULL), -- properties
+(NULL, NULL, 66, 130, NULL, 0, -1, NULL, NULL), -- templates
+(NULL, NULL, 67, 131, NULL, 0, -1, NULL, NULL), -- types
+(NULL, NULL, 68, 132, NULL, 0, -1, NULL, NULL), -- restrictions
+(NULL, NULL, 69, 133, NULL, 0, -1, NULL, NULL), -- unit_types
+(NULL, NULL, 70, 134, NULL, 0, -1, NULL, NULL), -- units
+(NULL, NULL, 71, 135, NULL, 0, -1, NULL, NULL), -- info_configs
+(NULL, NULL, 72, 136, NULL, 0, -1, NULL, NULL), -- codes
+(NULL, NULL, 73, 137, NULL, 0, -1, NULL, NULL), -- schemas
+(NULL, NULL, 74, 138, NULL, 0, -1, NULL, NULL), -- lists
+(NULL, NULL, 75, 139, NULL, 0, -1, NULL, NULL), -- baselines
+(NULL, NULL, 76, 140, NULL, 0, -1, NULL, NULL), -- data
+(NULL, NULL, 77, 141, NULL, 0, -1, NULL, NULL), -- files
+(NULL, NULL, 78, 142, NULL, 0, -1, 'type', NULL), -- organizations
+(NULL, NULL, 79, 143, NULL, 0, -1, NULL, NULL), -- users
+(NULL, NULL, 80, 144, NULL, 0, -1, NULL, NULL), -- logs
+(NULL, NULL, 81, 145, NULL, 0, -1, NULL, NULL), -- models
+(NULL, NULL, 82, 146, NULL, 0, -1, NULL, NULL), -- states
+(NULL, NULL, 83, 147, NULL, 0, -1, NULL, NULL), -- batchs
+(NULL, NULL, 84, 148, NULL, 0, -1, 'tag', NULL), -- airs
+(NULL, NULL, 85, 149, NULL, 0, -1, NULL, NULL); -- histories
 
 CREATE TABLE baselines (
     id integer PRIMARY KEY,
@@ -420,9 +574,6 @@ CREATE TABLE organizations (
     description text
 );
 
-INSERT INTO organizations (id, parent_id, no, name, type, address, telephone, contact, manager_id, description) VALUES
-(1, NULL, NULL, '航空兵所', 0, NULL, NULL, NULL, NULL, NULL);
-
 CREATE TABLE users (
     id integer PRIMARY KEY,
     login_name text,
@@ -438,6 +589,9 @@ CREATE TABLE users (
     role text,
     description text
 );
+
+INSERT INTO organizations (id, parent_id, no, name, type, address, telephone, contact, manager_id, description) VALUES
+(1, NULL, NULL, '航空兵所', 0, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO users (id, login_name, name, sex, birthday, organization_id, address, telephone, email, website, password, role, description) VALUES
 (1, 'admin', NULL, '0', NULL, '1', NULL, NULL, NULL, NULL, 'admin123', '管理员', NULL);

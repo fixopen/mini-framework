@@ -99,7 +99,7 @@ void zipNewInstaller(int organizationId) {
         "time": 1608082658301
     })json";
     nlohmann::json data = nlohmann::basic_json<>::parse(newData);
-    int id = utils::SqlData::insert(L"histories", data);
+    std::int64_t id = utils::SqlData::insert(L"histories", data);
 }
 
 void rwe(std::wstring const& fileName, std::wstring const& sheetname, std::wstring const& json);

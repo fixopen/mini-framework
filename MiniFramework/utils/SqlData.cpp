@@ -291,10 +291,10 @@ namespace utils::SqlData {
                 { L"restrictions", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"length", ColumnMeta::INTEGER }, { L"precision", ColumnMeta::INTEGER }, { L"min", ColumnMeta::REAL }, { L"max", ColumnMeta::REAL } } },
                 { L"unit_types", { { L"id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
                 { L"units", { { L"id", ColumnMeta::INTEGER }, { L"type_id", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"symbol", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
-                { L"info_configs", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type_no", ColumnMeta::INTEGER }, { L"restriction_id", ColumnMeta::INTEGER }, { L"unit_id", ColumnMeta::INTEGER } } },
+                { L"info_configs", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"type_no", ColumnMeta::INTEGER }, { L"reference_to", ColumnMeta::INTEGER }, { L"restriction_id", ColumnMeta::INTEGER }, { L"unit_id", ColumnMeta::INTEGER } } },
                 { L"codes", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"value", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
                 { L"schemas", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"no", ColumnMeta::INTEGER }, { L"name", ColumnMeta::TEXT }, { L"title", ColumnMeta::TEXT }, { L"is_hidden", ColumnMeta::INTEGER }, { L"type_no", ColumnMeta::INTEGER }, { L"is_required", ColumnMeta::INTEGER }, { L"restriction_id", ColumnMeta::INTEGER }, { L"unit_id", ColumnMeta::INTEGER }, { L"description", ColumnMeta::TEXT } } },
-                { L"lists", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"element_type_no", ColumnMeta::INTEGER }, { L"min", ColumnMeta::INTEGER }, { L"max", ColumnMeta::INTEGER }, { L"group_by", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
+                { L"lists", { { L"id", ColumnMeta::INTEGER }, { L"template_id", ColumnMeta::INTEGER }, { L"parent_no", ColumnMeta::INTEGER }, { L"element_type_no", ColumnMeta::INTEGER }, { L"tree_show_column_no", ColumnMeta::INTEGER }, { L"min", ColumnMeta::INTEGER }, { L"max", ColumnMeta::INTEGER }, { L"group_by", ColumnMeta::TEXT }, { L"description", ColumnMeta::TEXT } } },
                 { L"baselines", { { L"id", ColumnMeta::INTEGER }, { L"object_type", ColumnMeta::INTEGER }, { L"object_id", ColumnMeta::INTEGER }, { L"previous_version_id", ColumnMeta::INTEGER } } },
                 { L"data", { { L"id", ColumnMeta::INTEGER }, { L"info_config_id", ColumnMeta::INTEGER }, { L"baseline_id", ColumnMeta::INTEGER }, { L"parent_id", ColumnMeta::INTEGER }, { L"ref_id", ColumnMeta::INTEGER }, { L"serial_no", ColumnMeta::INTEGER }, { L"data", ColumnMeta::TEXT } } },
                 { L"files", { { L"id", ColumnMeta::INTEGER }, { L"type", ColumnMeta::TEXT }, { L"name", ColumnMeta::TEXT }, { L"ext", ColumnMeta::TEXT }, { L"content", ColumnMeta::BLOB }, { L"size", ColumnMeta::INTEGER }, { L"digest", ColumnMeta::TEXT } } },
@@ -673,9 +673,9 @@ namespace utils::SqlData {
         return result;
     }
 
-    long insert(std::wstring const& tableName, nlohmann::json const& data) {
+    std::int64_t insert(std::wstring const& tableName, nlohmann::json const& data) {
         // Log::log(data.dump());
-        long id = 0;
+        std::int64_t id = 0;
         auto const& columnInfos = getColumns(tableName);
         if (!columnInfos.empty()) {
             std::wstring valueList = L"";
@@ -744,11 +744,11 @@ namespace utils::SqlData {
         }
     }
 
-    long getLastId() {
+    std::int64_t getLastId() {
         return sqlite3_last_insert_rowid(db);
     }
 
-    std::string readBlob(std::wstring const& tableName, int id, std::wstring const& columnName) {
+    std::string readBlob(std::wstring const& tableName, std::int64_t id, std::wstring const& columnName) {
         sqlite3_blob* blob = nullptr;
         sqlite3_blob_open(db, "main", Texts::toUtf8(tableName).c_str(), Texts::toUtf8(columnName).c_str(), id, 0, &blob);
         auto length = sqlite3_blob_bytes(blob);
@@ -760,7 +760,7 @@ namespace utils::SqlData {
         return result;
     }
 
-    void fillBlob(std::wstring const& tableName, int id, std::wstring const& columnName, void const* data, int size) {
+    void fillBlob(std::wstring const& tableName, std::int64_t id, std::wstring const& columnName, void const* data, int size) {
         std::wstring update = L"UPDATE " + jsonQuote(tableName) + L" SET " + jsonQuote(columnName) + L" = ? WHERE id = " + std::to_wstring(id);
         sqlite3_stmt* stmt = nullptr;
         int rc = sqlite3_prepare_v2(db, Texts::toUtf8(update).c_str(),
@@ -906,7 +906,7 @@ namespace utils::SqlData {
             return u8"{\"武器\": " + randomWeapon() + u8", \"动力装置\": " + randomPower() + u8", \"雷达配置\": " + randomItem() + u8", \"电子对抗\": " + randomItem() + u8", \"外挂吊仓\": " + randomHang() + u8", \"数据链\": " + std::to_string(randomInt(3)) + u8", \"座椅\": " + randomSeat() + u8", \"特殊使用限制\": \"" + randomStr(60) + u8"\"}";
         }
 
-        void createBaseline(int type, int id) {
+        void createBaseline(int type, std::int64_t id) {
             // 5w configurations
             // create baseline
             // std::string baseline = u8"{\"适用目标\": " + std::to_string(type) + u8", \"目标id\": " + std::to_string(id) + u8", \"state\": 0}";
@@ -914,7 +914,7 @@ namespace utils::SqlData {
             baseline[u8"适用目标"] = type;
             baseline[u8"目标id"] = id;
             baseline[u8"state"] = 0;
-            int baselineId = insert(L"基线", baseline/*nlohmann::basic_json<>::parse(baseline)*/);
+            std::int64_t baselineId = insert(L"基线", baseline/*nlohmann::basic_json<>::parse(baseline)*/);
             // create five thousand configutations of the baseline
             for (int i = 0; i < 10; ++i) {
                 // std::string baseline = u8"{\"基线id\": " + std::to_string(baselineId) + u8", \"序号\": " + std::to_string(i) + u8", \"名称\": \"" + randomStr(12) + u8"\"}";
@@ -923,35 +923,35 @@ namespace utils::SqlData {
                 configuration[u8"序号"] = i;
                 configuration[u8"名称"] = randomStr(12);
                 configuration.erase(u8"parent_id");
-                int oneConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
+                std::int64_t oneConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
                 for (int j = 0; j < 10; ++j) {
                     // baseline = u8"{\"基线id\": " + std::to_string(baselineId) + u8", \"parent_id\": " + std::to_string(oneConfigurationId) + u8", \"序号\": " + std::to_string(j) + u8", \"名称\": \"" + randomStr(12) + u8"\"}";
                     configuration[u8"基线id"] = baselineId;
                     configuration[u8"parent_id"] = oneConfigurationId;
                     configuration[u8"序号"] = i;
                     configuration[u8"名称"] = randomStr(12);
-                    int twoConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
+                    std::int64_t twoConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
                     for (int k = 0; k < 20; ++k) {
                         // baseline = u8"{\"基线id\": " + std::to_string(baselineId) + u8", \"parent_id\": " + std::to_string(twoConfigurationId) + u8", \"序号\": " + std::to_string(k) + u8", \"名称\": \"" + randomStr(12) + u8"\"}";
                         configuration[u8"基线id"] = baselineId;
                         configuration[u8"parent_id"] = twoConfigurationId;
                         configuration[u8"序号"] = i;
                         configuration[u8"名称"] = randomStr(12);
-                        int threeConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
+                        std::int64_t threeConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
                         for (int l = 0; l < 5; ++l) {
                             // baseline = u8"{\"基线id\": " + std::to_string(baselineId) + u8", \"parent_id\": " + std::to_string(threeConfigurationId) + u8", \"序号\": " + std::to_string(l) + u8", \"名称\": \"" + randomStr(12) + u8"\"}";
                             configuration[u8"基线id"] = baselineId;
                             configuration[u8"parent_id"] = threeConfigurationId;
                             configuration[u8"序号"] = i;
                             configuration[u8"名称"] = randomStr(12);
-                            int fourConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
+                            std::int64_t fourConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
                             for (int m = 0; m < 5; ++m) {
                                 // baseline = u8"{\"基线id\": " + std::to_string(baselineId) + u8", \"parent_id\": " + std::to_string(fourConfigurationId) + u8", \"序号\": " + std::to_string(m) + u8", \"名称\": \"" + randomStr(12) + u8"\"}";
                                 configuration[u8"基线id"] = baselineId;
                                 configuration[u8"parent_id"] = fourConfigurationId;
                                 configuration[u8"序号"] = i;
                                 configuration[u8"名称"] = randomStr(12);
-                                int fiveConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
+                                std::int64_t fiveConfigurationId = insert(L"构型", configuration/*nlohmann::basic_json<>::parse(baseline)*/);
                             }
                         }
                     }
@@ -972,7 +972,7 @@ namespace utils::SqlData {
             model[u8"名称"] = randomStr(8);
             model[u8"state"] = 0;
             // Log::log(Texts::fromUtf8(model));
-            int modelId = insert(L"机型", model/*nlohmann::basic_json<>::parse(model)*/);
+            std::int64_t modelId = insert(L"机型", model/*nlohmann::basic_json<>::parse(model)*/);
             for (int j = 0; j < 2; ++j) {
                 // create (2) states of one model
                 // std::string state = u8"{\"机型id\": " + std::to_string(modelId) + u8", \"编号\": \"00" + std::to_string(j + 1) + u8"\", \"使命任务\": \"" + randomStr(80) + u8"\", \"state\": 0}";
@@ -982,7 +982,7 @@ namespace utils::SqlData {
                 state[u8"使命任务"] = randomStr(80);
                 state[u8"state"] = 0;
                 // Log::log(Texts::fromUtf8(state));
-                int stateId = insert(L"状态", state/*nlohmann::basic_json<>::parse(state)*/);
+                std::int64_t stateId = insert(L"状态", state/*nlohmann::basic_json<>::parse(state)*/);
                 for (int k = 0; k < 4; ++k) {
                     // create (4) batchs of one states
                     // std::string batch = u8"{\"状态id\": " + std::to_string(stateId) + u8", \"编号\": \"0" + std::to_string(k + 1) + u8"\", \"布局\": \"" + jsonEscape(randomLayout()) + u8"\", \"主要技术参数\": \"" + jsonEscape(randomParameters()) + u8"\", \"主要配备\": \"" + jsonEscape(randomCompounds()) + u8"\", \"state\": 0}";
@@ -993,7 +993,7 @@ namespace utils::SqlData {
                     batch[u8"主要技术参数"] = randomParameters(); // jsonEscape(randomParameters());
                     batch[u8"主要配备"] = randomCompounds(); // jsonEscape(randomCompounds());
                     batch[u8"state"] = 0;
-                    int batchId = insert(L"批次", batch/*nlohmann::basic_json<>::parse(batch)*/);
+                    std::int64_t batchId = insert(L"批次", batch/*nlohmann::basic_json<>::parse(batch)*/);
                     createBaseline(0, batchId);
                     for (int l = 0; l < 4; ++l) {
                         // create (4) airs of one batchs
@@ -1009,7 +1009,7 @@ namespace utils::SqlData {
                         air[u8"引擎使用寿命"] = std::to_string(randomInt(8000));
                         air[u8"引擎剩余寿命"] = std::to_string(randomInt(800));
                         air[u8"state"] = 0;
-                        int airId = insert(L"飞机", air/*nlohmann::basic_json<>::parse(air)*/);
+                        std::int64_t airId = insert(L"飞机", air/*nlohmann::basic_json<>::parse(air)*/);
                         createBaseline(1, airId);
                     }
                 }

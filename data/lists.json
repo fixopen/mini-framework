@@ -2,12 +2,13 @@
     {
         "description": null,
         "element_type_no": 129,
-        "group_by": "type",
+        "group_by": null,
         "id": 1,
         "max": -1,
         "min": 0,
         "parent_no": 65,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
     },
     {
         "description": null,
@@ -17,7 +18,8 @@
         "max": -1,
         "min": 0,
         "parent_no": 66,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
     },
     {
         "description": null,
@@ -27,7 +29,8 @@
         "max": -1,
         "min": 0,
         "parent_no": 67,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
     },
     {
         "description": null,
@@ -37,7 +40,8 @@
         "max": -1,
         "min": 0,
         "parent_no": 68,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
     },
     {
         "description": null,
@@ -47,16 +51,183 @@
         "max": -1,
         "min": 0,
         "parent_no": 69,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
     },
     {
         "description": null,
         "element_type_no": 134,
-        "group_by": "tag",
+        "group_by": null,
         "id": 6,
         "max": -1,
         "min": 0,
         "parent_no": 70,
-        "template_id": null
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 135,
+        "group_by": null,
+        "id": 7,
+        "max": -1,
+        "min": 0,
+        "parent_no": 71,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 136,
+        "group_by": null,
+        "id": 8,
+        "max": -1,
+        "min": 0,
+        "parent_no": 72,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 137,
+        "group_by": null,
+        "id": 9,
+        "max": -1,
+        "min": 0,
+        "parent_no": 73,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 138,
+        "group_by": null,
+        "id": 10,
+        "max": -1,
+        "min": 0,
+        "parent_no": 74,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 139,
+        "group_by": null,
+        "id": 11,
+        "max": -1,
+        "min": 0,
+        "parent_no": 75,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 140,
+        "group_by": null,
+        "id": 12,
+        "max": -1,
+        "min": 0,
+        "parent_no": 76,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 141,
+        "group_by": null,
+        "id": 13,
+        "max": -1,
+        "min": 0,
+        "parent_no": 77,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 142,
+        "group_by": "type",
+        "id": 14,
+        "max": -1,
+        "min": 0,
+        "parent_no": 78,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 143,
+        "group_by": null,
+        "id": 15,
+        "max": -1,
+        "min": 0,
+        "parent_no": 79,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 144,
+        "group_by": null,
+        "id": 16,
+        "max": -1,
+        "min": 0,
+        "parent_no": 80,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 145,
+        "group_by": null,
+        "id": 17,
+        "max": -1,
+        "min": 0,
+        "parent_no": 81,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 146,
+        "group_by": null,
+        "id": 18,
+        "max": -1,
+        "min": 0,
+        "parent_no": 82,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 147,
+        "group_by": null,
+        "id": 19,
+        "max": -1,
+        "min": 0,
+        "parent_no": 83,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 148,
+        "group_by": "tag",
+        "id": 20,
+        "max": -1,
+        "min": 0,
+        "parent_no": 84,
+        "template_id": null,
+        "tree_show_column_no": null
+    },
+    {
+        "description": null,
+        "element_type_no": 149,
+        "group_by": null,
+        "id": 21,
+        "max": -1,
+        "min": 0,
+        "parent_no": 85,
+        "template_id": null,
+        "tree_show_column_no": null
     }
 ]

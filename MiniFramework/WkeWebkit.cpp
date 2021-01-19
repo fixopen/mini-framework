@@ -876,7 +876,7 @@ jsValue JS_CALL CWkeWebkitUI::Insert(jsExecState es) {
             std::wstring tableName = jsToTempStringW(es, tn);
             std::wstring dataJson = jsToTempStringW(es, d);
             nlohmann::json data = nlohmann::basic_json<>::parse(utils::Texts::toUtf8(dataJson));
-            int id = utils::SqlData::insert(tableName, data);
+            int64_t id = utils::SqlData::insert(tableName, data);
             // utils::Log::log("insert finally, id is " + std::to_string(id));
             result = jsInt(id);
         }
@@ -995,19 +995,20 @@ jsValue JS_CALL CWkeWebkitUI::Restore(jsExecState es) {
 }
 
 namespace {
-    void importBaseline(std::wstring const& workPath, nlohmann::json& data, int baselineId) {
-        map<int, int> configurationIdMaps;
+    void importBaseline(std::wstring const& workPath, nlohmann::json& data, int64_t baselineId) {
+        map<int64_t, int64_t> configurationIdMaps;
         for (auto& configuration : data["configurations"]) {
-            configuration[u8"基线id"] = baselineId;
-            long oldId = configuration["id"].get<std::int64_t>();
+            configuration[u8"baseline_id"] = baselineId;
+            int64_t oldId = configuration["id"].get<std::int64_t>();
             configuration.erase("id");
             if (configuration.contains("parent_id") && !configuration["parent_id"].is_null()) {
-                long oldParentId = configuration["parent_id"].get<std::int64_t>();
+                int64_t oldParentId = configuration["parent_id"].get<std::int64_t>();
                 configuration["parent_id"] = configurationIdMaps[oldParentId];
             }
-            long newId = utils::SqlData::insert(L"构型", configuration);
+            int64_t newId = utils::SqlData::insert(L"data", configuration);
             configurationIdMaps.insert(std::make_pair(oldId, newId));
         }
+        /*
         for (auto& auxiliary : data["auxiliaries"]) {
             auxiliary[u8"基线id"] = baselineId;
             auxiliary.erase("id");
@@ -1030,7 +1031,7 @@ namespace {
         }
         for (auto& technologyStateFile : data["technologyStateFiles"]) {
             if (data.contains("files")) {
-                int fileId = technologyStateFile[u8"附件"].get<std::int64_t>();
+                int64_t fileId = technologyStateFile[u8"附件"].get<std::int64_t>();
                 for (auto& file : data["files"]) {
                     if (file["id"].get<std::int64_t>() == fileId) {
                         std::string type = "application/json";
@@ -1047,7 +1048,7 @@ namespace {
                         } else {
                             json = "{\"type\": \"" + type + "\", \"ext\": \"" + ext + "\"}";
                         }
-                        int newFileId = utils::SqlData::insert(L"files", nlohmann::basic_json<>::parse(json));
+                        int64_t newFileId = utils::SqlData::insert(L"files", nlohmann::basic_json<>::parse(json));
                         if (!ext.empty()) {
                             std::string fileContent = utils::Folders::ReadFile(workPath + L"\\技术状态文件\\"
                                 + std::to_wstring(technologyStateFile[u8"类型"].get<std::int64_t>()) + L"\\"
@@ -1063,7 +1064,7 @@ namespace {
             technologyStateFile[u8"基线id"] = baselineId;
             technologyStateFile.erase("id");
             if (technologyStateFile.contains(u8"构型节点id") && !technologyStateFile[u8"构型节点id"].is_null()) {
-                int oldId = technologyStateFile[u8"构型节点id"].get<std::int64_t>();
+                int64_t oldId = technologyStateFile[u8"构型节点id"].get<std::int64_t>();
                 technologyStateFile[u8"构型节点id"] = configurationIdMaps[oldId];
             }
             utils::SqlData::insert(L"技术状态文件", technologyStateFile);
@@ -1083,6 +1084,7 @@ namespace {
             problem.erase("id");
             utils::SqlData::insert(L"交付遗留问题及处置情况", problem);
         }
+        */
     }
 }
 
@@ -1107,22 +1109,22 @@ jsValue JS_CALL CWkeWebkitUI::ImportPackage(jsExecState es) {
                 int idValue = jsToInt(es, id);
                 nlohmann::json data = nlohmann::basic_json<>::parse(utils::Folders::ReadFile(workPath + L"\\meta.json"));
                 if (data.contains("air")) {
-                    data["air"][u8"批次id"] = idValue;
+                    data["air"][u8"batch_id"] = idValue;
                     data["air"]["state"] = 0;
                     data["air"].erase("id");
-                    int airId = utils::SqlData::insert(L"飞机", data["air"]);
-                    data["baseline"][u8"目标id"] = airId;
+                    int64_t airId = utils::SqlData::insert(L"飞机", data["air"]);
+                    data["baseline"][u8"object_id"] = airId;
                     data["baseline"].erase("id");
-                    int baselineId = utils::SqlData::insert(L"基线", data["baseline"]);
+                    int64_t baselineId = utils::SqlData::insert(L"baselines", data["baseline"]);
                     importBaseline(workPath, data, baselineId);
                 } else {
-                    data["batch"][u8"状态id"] = idValue;
+                    data["batch"][u8"state_id"] = idValue;
                     data["batch"]["state"] = 0;
                     data["batch"].erase("id");
-                    int batchId = utils::SqlData::insert(L"批次", data["batch"]);
-                    data["baseline"][u8"目标id"] = batchId;
+                    int64_t batchId = utils::SqlData::insert(L"batchs", data["batch"]);
+                    data["baseline"][u8"object_id"] = batchId;
                     data["baseline"].erase("id");
-                    int baselineId = utils::SqlData::insert(L"基线", data["baseline"]);
+                    int64_t baselineId = utils::SqlData::insert(L"baselines", data["baseline"]);
                     importBaseline(workPath, data, baselineId);
                 }
                 result = jsInt(0);
@@ -1138,7 +1140,7 @@ namespace {
         std::wstring ext;
     };
 
-    Result saveFile(int idValue, std::wstring const& fileName) {
+    Result saveFile(int64_t idValue, std::wstring const& fileName) {
         Result result = { 0, L"" };
         // int result = 0;
         std::wstring meta = utils::SqlData::query(L"files", L"id = " + std::to_wstring(idValue), L"");
@@ -1241,10 +1243,10 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
 
             std::vector<std::optional<std::wstring>> baseline;
             auto baselines = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"基线"))
-                + L" FROM \"基线\" WHERE \"适用目标\" = "
+                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"baselines"))
+                + L" FROM \"baselines\" WHERE \"object_type\" = "
                 + std::to_wstring(typeValue)
-                + L" AND \"目标id\" = "
+                + L" AND \"object_id\" = "
                 + std::to_wstring(idValue));
             if (baselines.size() == 1) {
                 baseline = baselines[0];
@@ -1257,8 +1259,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
             switch (typeValue) {
                 case 0:
                     batchs = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                        + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"批次"))
-                        + L" FROM \"批次\" WHERE id = "
+                        + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"batchs"))
+                        + L" FROM \"batchs\" WHERE id = "
                         + std::to_wstring(idValue));
                     if (batchs.size() == 1) {
                         batch = batchs[0];
@@ -1266,14 +1268,14 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                     break;
                 case 1:
                     airs = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                        + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"飞机"))
-                        + L" FROM \"飞机\" WHERE id = "
+                        + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"airs"))
+                        + L" FROM \"airs\" WHERE id = "
                         + std::to_wstring(idValue));
                     if (airs.size() == 1) {
                         air = airs[0];
                         batchs = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"批次"))
-                            + L" FROM \"批次\" WHERE id = "
+                            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"batchs"))
+                            + L" FROM \"batchs\" WHERE id = "
                             + air[1].value());
                         if (batchs.size() == 1) {
                             batch = batchs[0];
@@ -1284,8 +1286,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
 
             std::vector<std::optional<std::wstring>> state;
             std::vector<std::vector<std::optional<std::wstring>>> states = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"状态"))
-                + L" FROM \"状态\" WHERE id = "
+                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"states"))
+                + L" FROM \"states\" WHERE id = "
                 + batch[1].value());
             if (states.size() == 1) {
                 state = states[0];
@@ -1293,18 +1295,18 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
 
             std::vector<std::optional<std::wstring>> model;
             std::vector<std::vector<std::optional<std::wstring>>> models = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"机型"))
-                + L" FROM \"机型\" WHERE id = "
+                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"models"))
+                + L" FROM \"models\" WHERE id = "
                 + state[1].value());
             if (models.size() == 1) {
                 model = models[0];
             }
             
             std::vector<std::vector<std::optional<std::wstring>>> configurations = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"构型"))
-                + L" FROM \"构型\" WHERE \"基线id\" = "
+                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"data"))
+                + L" FROM \"data\" WHERE \"ref_id\" = "
                 + baseline[0].value());
-            
+            /*
             std::vector<std::vector<std::optional<std::wstring>>> auxiliaries = utils::SqlData::ExecuteQueryTable(L"SELECT "
                 + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"随机设备工具"))
                 + L" FROM \"随机设备工具\" WHERE \"基线id\" = "
@@ -1354,21 +1356,22 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                 + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"交付遗留问题及处置情况"))
                 + L" FROM \"交付遗留问题及处置情况\" WHERE \"基线id\" = "
                 + baseline[0].value());
-
-            std::wstring r = L"{\"baseline\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"基线"), baseline)
-                + L", \"batch\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"批次"), batch)
-                + L", \"state\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"状态"), state)
-                + L", \"model\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"机型"), model)
-                + L", \"configurations\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"构型"), configurations)
-                + L", \"auxiliaries\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机设备工具"), auxiliaries)
-                + L", \"machineAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"机械专业随机备件"), machineAux)
-                + L", \"resourceAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机资料目录"), resourceAux)
-                + L", \"resourceDirectoryAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机资料配套目录"), resourceDirectoryAux)
-                + L", \"technologyStateFiles\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"技术状态文件"), technologyStateFiles)
-                + L", \"files\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"files"), files)
-                + L", \"lifespans\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"有寿件"), lifespans)
-                + L", \"doubleCurrents\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"双流水"), doubleCurrents)
-                + L", \"problems\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"交付遗留问题及处置情况"), problems)
+            */
+            std::wstring r = L"{\"baseline\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"baselines"), baseline)
+                + L", \"batch\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"batchs"), batch)
+                + L", \"state\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"states"), state)
+                + L", \"model\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"models"), model)
+                + L", \"data\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"data"), configurations)
+                //+ L", \"configurations\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"构型"), configurations)
+                //+ L", \"auxiliaries\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机设备工具"), auxiliaries)
+                //+ L", \"machineAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"机械专业随机备件"), machineAux)
+                //+ L", \"resourceAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机资料目录"), resourceAux)
+                //+ L", \"resourceDirectoryAux\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"随机资料配套目录"), resourceDirectoryAux)
+                //+ L", \"technologyStateFiles\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"技术状态文件"), technologyStateFiles)
+                //+ L", \"files\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"files"), files)
+                //+ L", \"lifespans\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"有寿件"), lifespans)
+                //+ L", \"doubleCurrents\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"双流水"), doubleCurrents)
+                //+ L", \"problems\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"交付遗留问题及处置情况"), problems)
                 + (air.empty() ? L"" : L", \"air\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"飞机"), air))
                 + L"}";
             std::wstring rootPath = utils::Folders::GetCurrentPath() + L"\\export";
@@ -1398,7 +1401,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                     }
                 }
             }
-
+            /*
             // batch[8] // 喷涂方案
             if (batch[8].has_value()) {
                 std::wstring bid = batch[8].value();
@@ -1421,7 +1424,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                     saveFile(std::stoi(blob), typePath + L"\\" + name);
                 }
             }
-            
+            */
             // zip it
             std::wstring zipFilename;
             // model[3] // 名称
@@ -1515,15 +1518,15 @@ jsValue JS_CALL CWkeWebkitUI::ExportOrganizationsPackage(jsExecState es) {
     int argCount = jsArgCount(es);
     if (argCount == 0) {
         auto organizations = utils::SqlData::ExecuteQueryTable(L"SELECT "
-            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"组织"))
-            + L" FROM \"组织\"");
+            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"organizations"))
+            + L" FROM \"organizations\"");
 
         auto users = utils::SqlData::ExecuteQueryTable(L"SELECT "
-            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"用户"))
-            + L" FROM \"用户\"");
+            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"users"))
+            + L" FROM \"users\"");
 
-        std::wstring r = L"{\"organizations\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"组织"), organizations)
-            + L", \"users\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"用户"), users)
+        std::wstring r = L"{\"organizations\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"organizations"), organizations)
+            + L", \"users\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"users"), users)
             + L"}";
 
         std::wstring destPath = utils::Folders::GetCurrentPath() + L"\\export";
@@ -1576,8 +1579,8 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
             int organizationId = jsToInt(es, orgId);
             // query organization via organizationId
             std::vector<std::vector<std::optional<std::wstring>>> organizations = utils::SqlData::ExecuteQueryTable(L"SELECT "
-                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"组织"))
-                + L" FROM \"组织\" WHERE \"id\" = "
+                + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"organizations"))
+                + L" FROM \"organizations\" WHERE \"id\" = "
                 + std::to_wstring(organizationId));
             if (organizations.size() == 1) {
                 std::wstring type = L"admin.bin";
