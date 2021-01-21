@@ -488,7 +488,7 @@ const types = [
     type: 1
   }
 ]
-// id, template_id, length, precision, min, max
+// id, template_id, length, format, precision, min, max
 const restrictions = []
 // id, name, description
 const unitTypes = [
@@ -1364,7 +1364,7 @@ const units = [
     type_id: 35
   }
 ]
-// id, template_id, parent_id, type, no, name, type_no, reference_to, restriction_id, unit_id
+// id, template_id, parent_id, type, no, name, type_no, reference_to, is_required, restriction_id, unit_id, description
 const infoConfigs = []
 // id, template_id, parent_no, no, value, description
 const codes = [
@@ -6102,11 +6102,7 @@ const isJSON = str => {
   if (typeof str === 'string') {
     try {
       const obj = JSON.parse(str)
-      if (typeof obj === 'object' && obj) {
-        return true
-      } else {
-        return false
-      }
+      return !!(typeof obj === 'object' && obj);
     } catch (e) {
       return false
     }

@@ -92,6 +92,7 @@ CREATE TABLE restrictions (
     id integer PRIMARY KEY,
     template_id integer REFERENCES templates (id),
     length integer,
+    format integer,
     precision integer,
     min real,
     max real
@@ -257,8 +258,10 @@ CREATE TABLE info_configs (
     name text,
     type_no integer, -- REFERENCES types (no)
     reference_to integer REFERENCES info_configs (id),
+    is_required integer, -- 0: should, 1: must
     restriction_id integer REFERENCES restrictions (id),
-    unit_id integer REFERENCES units (id)
+    unit_id integer REFERENCES units (id),
+    description text
 );
 
 CREATE TABLE codes (
@@ -340,9 +343,10 @@ INSERT INTO schemas (id, template_id, parent_no, no, name, title, is_hidden, typ
 (NULL, NULL, 132, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
 (NULL, NULL, 132, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
 (NULL, NULL, 132, 2, 'length', '长度', 0, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 3, 'precision', '精度', 0, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 4, 'min', '最小值', 0, 5, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 5, 'max', '最大值', 1, 5, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 3, 'format', '格式', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 4, 'precision', '精度', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 5, 'min', '最小值', 0, 5, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 6, 'max', '最大值', 1, 5, 0, NULL, NULL, NULL),
 -- unit_type
 (NULL, NULL, 133, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
 (NULL, NULL, 133, 1, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
@@ -362,8 +366,10 @@ INSERT INTO schemas (id, template_id, parent_no, no, name, title, is_hidden, typ
 (NULL, NULL, 135, 5, 'name', '名称', 0, 1, 1, NULL, NULL, NULL),
 (NULL, NULL, 135, 6, 'type_no', '类型编号', 0, 4, 1, NULL, NULL, NULL),
 (NULL, NULL, 135, 7, 'reference_to', '引用到', 0, 71, 0, NULL, NULL, '{"value": "id", "show": "name"}'),
-(NULL, NULL, 135, 8, 'restriction_id', '限制id', 0, 68, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
-(NULL, NULL, 135, 9, 'unit_id', '单位id', 0, 70, 0, NULL, NULL, '{"value": "id", "show": "symbol"}'),
+(NULL, NULL, 135, 8, 'is_required', '必填', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 135, 9, 'restriction_id', '限制id', 0, 68, 0, NULL, NULL, '{"value": "id", "show": "id"}'),
+(NULL, NULL, 135, 10, 'unit_id', '单位id', 0, 70, 0, NULL, NULL, '{"value": "id", "show": "symbol"}'),
+(NULL, NULL, 135, 11, 'description', '备注', 1, 2, 0, NULL, NULL, NULL),
 -- code
 (NULL, NULL, 136, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
 (NULL, NULL, 136, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
