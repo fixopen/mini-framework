@@ -102,29 +102,6 @@ void CMainWnd::InitWindow() {
     CDuiString sUrl = scheme + base + homePagePath;
     pWeb->Navigate(sUrl);
     pWeb->SetWkeCallback(this);
-    /*
-    m_pAddressEdit = static_cast<CEditUI*>(m_pm.FindControl(_T("address_edit")));
-    m_pSearchEdit = static_cast<CEditUI*>(m_pm.FindControl(_T("search_edit")));
-    m_pBrowserTabBar = static_cast<CHorizontalLayoutUI*>(m_pm.FindControl(_T("browser_tabbar")));
-    m_pBrowserTabBody = static_cast<CTabLayoutUI*>(m_pm.FindControl(_T("browser_tabbody")));
-    m_pModeMainTab = static_cast<CTabLayoutUI*>(m_pm.FindControl(_T("tabModeMain")));
-    if (m_pModeMainTab) {
-        if (m_pModeMainTab->GetCurSel() == 0) {
-            // 创建起始页
-            CreateNewTabAndGo(sHomePage);
-        } else {
-            CWkeWebkitUI* pWeb = static_cast<CWkeWebkitUI*>(m_pm.FindControl(_T("wkeTest")));
-            CDuiString sUrl = L"http://hook.test/resources/view/index.html";
-            //CDuiString sUrl = L"file:///E:\study\MiniBlinkBrowser\bin\//resources//error//error.html";
-            pWeb->Navigate(sUrl);
-            pWeb->SetWkeCallback(this);
-        }
-    }
-    */
-    //m_pDownloadWnd = new CDownloadWnd;
-    //m_pDownloadWnd->Create(nullptr, _T("downwnd"), WS_POPUP | WS_VISIBLE, WS_EX_TOOLWINDOW);
-    //m_pDownloadWnd->CenterWindow();
-    //::PostMessageW(m_pDownloadWnd->GetHWND(), WM_SYSCOMMAND, SC_MINIMIZE, 0);
 }
 
 DuiLib::CDuiString CMainWnd::GetSkinFile() {

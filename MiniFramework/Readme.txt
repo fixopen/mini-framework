@@ -5,3 +5,7 @@ Use SQLite
 Use Word/Excel parse/format
 Use boost.filesystem
 Use zlib/minizip
+
+node.dll
+Skin/
+resources/

@@ -228,8 +228,22 @@
         "id": 17,
         "is_hidden": 0,
         "is_required": 0,
-        "name": "precision",
+        "name": "format",
         "no": 3,
+        "parent_no": 132,
+        "restriction_id": null,
+        "template_id": null,
+        "title": "格式",
+        "type_no": 4,
+        "unit_id": null
+    },
+    {
+        "description": null,
+        "id": 18,
+        "is_hidden": 0,
+        "is_required": 0,
+        "name": "precision",
+        "no": 4,
         "parent_no": 132,
         "restriction_id": null,
         "template_id": null,
@@ -239,11 +253,11 @@
     },
     {
         "description": null,
-        "id": 18,
+        "id": 19,
         "is_hidden": 0,
         "is_required": 0,
         "name": "min",
-        "no": 4,
+        "no": 5,
         "parent_no": 132,
         "restriction_id": null,
         "template_id": null,
@@ -253,11 +267,11 @@
     },
     {
         "description": null,
-        "id": 19,
+        "id": 20,
         "is_hidden": 1,
         "is_required": 0,
         "name": "max",
-        "no": 5,
+        "no": 6,
         "parent_no": 132,
         "restriction_id": null,
         "template_id": null,
@@ -267,7 +281,7 @@
     },
     {
         "description": "主键",
-        "id": 20,
+        "id": 21,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -281,7 +295,7 @@
     },
     {
         "description": null,
-        "id": 21,
+        "id": 22,
         "is_hidden": 0,
         "is_required": 1,
         "name": "name",
@@ -295,7 +309,7 @@
     },
     {
         "description": null,
-        "id": 22,
+        "id": 23,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -309,7 +323,7 @@
     },
     {
         "description": "主键",
-        "id": 23,
+        "id": 24,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -323,7 +337,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 24,
+        "id": 25,
         "is_hidden": 1,
         "is_required": 0,
         "name": "type_id",
@@ -337,7 +351,7 @@
     },
     {
         "description": null,
-        "id": 25,
+        "id": 26,
         "is_hidden": 0,
         "is_required": 1,
         "name": "name",
@@ -351,7 +365,7 @@
     },
     {
         "description": null,
-        "id": 26,
+        "id": 27,
         "is_hidden": 0,
         "is_required": 0,
         "name": "symbol",
@@ -365,7 +379,7 @@
     },
     {
         "description": null,
-        "id": 27,
+        "id": 28,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -379,7 +393,7 @@
     },
     {
         "description": "主键",
-        "id": 28,
+        "id": 29,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -393,7 +407,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 29,
+        "id": 30,
         "is_hidden": 1,
         "is_required": 1,
         "name": "template_id",
@@ -407,7 +421,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 30,
+        "id": 31,
         "is_hidden": 0,
         "is_required": 0,
         "name": "parent_id",
@@ -421,7 +435,7 @@
     },
     {
         "description": null,
-        "id": 31,
+        "id": 32,
         "is_hidden": 0,
         "is_required": 1,
         "name": "type",
@@ -435,7 +449,7 @@
     },
     {
         "description": null,
-        "id": 32,
+        "id": 33,
         "is_hidden": 0,
         "is_required": 1,
         "name": "no",
@@ -449,7 +463,7 @@
     },
     {
         "description": null,
-        "id": 33,
+        "id": 34,
         "is_hidden": 0,
         "is_required": 1,
         "name": "name",
@@ -463,7 +477,7 @@
     },
     {
         "description": null,
-        "id": 34,
+        "id": 35,
         "is_hidden": 0,
         "is_required": 1,
         "name": "type_no",
@@ -477,7 +491,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 35,
+        "id": 36,
         "is_hidden": 0,
         "is_required": 0,
         "name": "reference_to",
@@ -490,12 +504,26 @@
         "unit_id": null
     },
     {
+        "description": null,
+        "id": 37,
+        "is_hidden": 0,
+        "is_required": 0,
+        "name": "is_required",
+        "no": 8,
+        "parent_no": 135,
+        "restriction_id": null,
+        "template_id": null,
+        "title": "必填",
+        "type_no": 4,
+        "unit_id": null
+    },
+    {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 36,
+        "id": 38,
         "is_hidden": 0,
         "is_required": 0,
         "name": "restriction_id",
-        "no": 8,
+        "no": 9,
         "parent_no": 135,
         "restriction_id": null,
         "template_id": null,
@@ -505,11 +533,11 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"symbol\"}",
-        "id": 37,
+        "id": 39,
         "is_hidden": 0,
         "is_required": 0,
         "name": "unit_id",
-        "no": 9,
+        "no": 10,
         "parent_no": 135,
         "restriction_id": null,
         "template_id": null,
@@ -518,8 +546,22 @@
         "unit_id": null
     },
     {
+        "description": null,
+        "id": 40,
+        "is_hidden": 1,
+        "is_required": 0,
+        "name": "description",
+        "no": 11,
+        "parent_no": 135,
+        "restriction_id": null,
+        "template_id": null,
+        "title": "备注",
+        "type_no": 2,
+        "unit_id": null
+    },
+    {
         "description": "主键",
-        "id": 38,
+        "id": 41,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -533,7 +575,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 39,
+        "id": 42,
         "is_hidden": 1,
         "is_required": 1,
         "name": "template_id",
@@ -547,7 +589,7 @@
     },
     {
         "description": null,
-        "id": 40,
+        "id": 43,
         "is_hidden": 1,
         "is_required": 1,
         "name": "parent_no",
@@ -561,7 +603,7 @@
     },
     {
         "description": null,
-        "id": 41,
+        "id": 44,
         "is_hidden": 0,
         "is_required": 1,
         "name": "no",
@@ -575,7 +617,7 @@
     },
     {
         "description": null,
-        "id": 42,
+        "id": 45,
         "is_hidden": 0,
         "is_required": 1,
         "name": "value",
@@ -589,7 +631,7 @@
     },
     {
         "description": null,
-        "id": 43,
+        "id": 46,
         "is_hidden": 1,
         "is_required": 0,
         "name": "description",
@@ -603,7 +645,7 @@
     },
     {
         "description": "主键",
-        "id": 44,
+        "id": 47,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -617,7 +659,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 45,
+        "id": 48,
         "is_hidden": 1,
         "is_required": 1,
         "name": "template_id",
@@ -631,7 +673,7 @@
     },
     {
         "description": null,
-        "id": 46,
+        "id": 49,
         "is_hidden": 1,
         "is_required": 1,
         "name": "parent_no",
@@ -645,7 +687,7 @@
     },
     {
         "description": null,
-        "id": 47,
+        "id": 50,
         "is_hidden": 1,
         "is_required": 1,
         "name": "no",
@@ -659,7 +701,7 @@
     },
     {
         "description": null,
-        "id": 48,
+        "id": 51,
         "is_hidden": 0,
         "is_required": 1,
         "name": "name",
@@ -673,7 +715,7 @@
     },
     {
         "description": null,
-        "id": 49,
+        "id": 52,
         "is_hidden": 0,
         "is_required": 0,
         "name": "title",
@@ -687,7 +729,7 @@
     },
     {
         "description": null,
-        "id": 50,
+        "id": 53,
         "is_hidden": 0,
         "is_required": 1,
         "name": "is_hidden",
@@ -701,7 +743,7 @@
     },
     {
         "description": null,
-        "id": 51,
+        "id": 54,
         "is_hidden": 0,
         "is_required": 1,
         "name": "type_no",
@@ -715,7 +757,7 @@
     },
     {
         "description": null,
-        "id": 52,
+        "id": 55,
         "is_hidden": 0,
         "is_required": 0,
         "name": "is_required",
@@ -729,7 +771,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 53,
+        "id": 56,
         "is_hidden": 0,
         "is_required": 0,
         "name": "restriction_id",
@@ -743,7 +785,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"symbol\"}",
-        "id": 54,
+        "id": 57,
         "is_hidden": 0,
         "is_required": 0,
         "name": "unit_id",
@@ -757,7 +799,7 @@
     },
     {
         "description": null,
-        "id": 55,
+        "id": 58,
         "is_hidden": 1,
         "is_required": 0,
         "name": "description",
@@ -771,7 +813,7 @@
     },
     {
         "description": "主键",
-        "id": 56,
+        "id": 59,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -785,7 +827,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 57,
+        "id": 60,
         "is_hidden": 1,
         "is_required": 1,
         "name": "template_id",
@@ -799,7 +841,7 @@
     },
     {
         "description": null,
-        "id": 58,
+        "id": 61,
         "is_hidden": 1,
         "is_required": 1,
         "name": "parent_no",
@@ -813,7 +855,7 @@
     },
     {
         "description": null,
-        "id": 59,
+        "id": 62,
         "is_hidden": 0,
         "is_required": 1,
         "name": "element_type_no",
@@ -827,7 +869,7 @@
     },
     {
         "description": null,
-        "id": 60,
+        "id": 63,
         "is_hidden": 0,
         "is_required": 0,
         "name": "tree_show_column_no",
@@ -841,7 +883,7 @@
     },
     {
         "description": null,
-        "id": 61,
+        "id": 64,
         "is_hidden": 0,
         "is_required": 0,
         "name": "min",
@@ -855,7 +897,7 @@
     },
     {
         "description": null,
-        "id": 62,
+        "id": 65,
         "is_hidden": 0,
         "is_required": 0,
         "name": "max",
@@ -869,7 +911,7 @@
     },
     {
         "description": null,
-        "id": 63,
+        "id": 66,
         "is_hidden": 0,
         "is_required": 0,
         "name": "group_by",
@@ -883,7 +925,7 @@
     },
     {
         "description": null,
-        "id": 64,
+        "id": 67,
         "is_hidden": 1,
         "is_required": 0,
         "name": "description",
@@ -897,7 +939,7 @@
     },
     {
         "description": "主键",
-        "id": 65,
+        "id": 68,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -911,7 +953,7 @@
     },
     {
         "description": null,
-        "id": 66,
+        "id": 69,
         "is_hidden": 1,
         "is_required": 0,
         "name": "object_type",
@@ -925,7 +967,7 @@
     },
     {
         "description": "批次或单机的id",
-        "id": 67,
+        "id": 70,
         "is_hidden": 1,
         "is_required": 0,
         "name": "object_id",
@@ -939,7 +981,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 68,
+        "id": 71,
         "is_hidden": 1,
         "is_required": 0,
         "name": "previous_version_id",
@@ -953,7 +995,7 @@
     },
     {
         "description": "主键",
-        "id": 69,
+        "id": 72,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -967,7 +1009,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 70,
+        "id": 73,
         "is_hidden": 71,
         "is_required": 0,
         "name": "info_config_id",
@@ -981,7 +1023,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 71,
+        "id": 74,
         "is_hidden": 0,
         "is_required": 0,
         "name": "baseline_id",
@@ -995,7 +1037,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 72,
+        "id": 75,
         "is_hidden": 0,
         "is_required": 0,
         "name": "parent_id",
@@ -1009,7 +1051,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"id\"}",
-        "id": 73,
+        "id": 76,
         "is_hidden": 0,
         "is_required": 0,
         "name": "ref_id",
@@ -1023,7 +1065,7 @@
     },
     {
         "description": null,
-        "id": 74,
+        "id": 77,
         "is_hidden": 0,
         "is_required": 0,
         "name": "serial_no",
@@ -1037,7 +1079,7 @@
     },
     {
         "description": null,
-        "id": 75,
+        "id": 78,
         "is_hidden": 0,
         "is_required": 0,
         "name": "data",
@@ -1051,7 +1093,7 @@
     },
     {
         "description": "主键",
-        "id": 76,
+        "id": 79,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1065,7 +1107,7 @@
     },
     {
         "description": null,
-        "id": 77,
+        "id": 80,
         "is_hidden": 0,
         "is_required": 0,
         "name": "type",
@@ -1079,7 +1121,7 @@
     },
     {
         "description": null,
-        "id": 78,
+        "id": 81,
         "is_hidden": 0,
         "is_required": 0,
         "name": "name",
@@ -1093,7 +1135,7 @@
     },
     {
         "description": null,
-        "id": 79,
+        "id": 82,
         "is_hidden": 0,
         "is_required": 0,
         "name": "ext",
@@ -1107,7 +1149,7 @@
     },
     {
         "description": null,
-        "id": 80,
+        "id": 83,
         "is_hidden": 0,
         "is_required": 0,
         "name": "content",
@@ -1121,7 +1163,7 @@
     },
     {
         "description": null,
-        "id": 81,
+        "id": 84,
         "is_hidden": 0,
         "is_required": 0,
         "name": "size",
@@ -1135,7 +1177,7 @@
     },
     {
         "description": null,
-        "id": 82,
+        "id": 85,
         "is_hidden": 0,
         "is_required": 0,
         "name": "digest",
@@ -1149,7 +1191,7 @@
     },
     {
         "description": "主键",
-        "id": 83,
+        "id": 86,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1163,7 +1205,7 @@
     },
     {
         "description": null,
-        "id": 84,
+        "id": 87,
         "is_hidden": 0,
         "is_required": 0,
         "name": "no",
@@ -1177,7 +1219,7 @@
     },
     {
         "description": null,
-        "id": 85,
+        "id": 88,
         "is_hidden": 0,
         "is_required": 0,
         "name": "name",
@@ -1191,7 +1233,7 @@
     },
     {
         "description": null,
-        "id": 86,
+        "id": 89,
         "is_hidden": 1,
         "is_required": 0,
         "name": "type",
@@ -1205,7 +1247,7 @@
     },
     {
         "description": null,
-        "id": 87,
+        "id": 90,
         "is_hidden": 1,
         "is_required": 0,
         "name": "address",
@@ -1219,7 +1261,7 @@
     },
     {
         "description": null,
-        "id": 88,
+        "id": 91,
         "is_hidden": 1,
         "is_required": 0,
         "name": "telephone",
@@ -1233,7 +1275,7 @@
     },
     {
         "description": null,
-        "id": 89,
+        "id": 92,
         "is_hidden": 0,
         "is_required": 0,
         "name": "contact",
@@ -1247,7 +1289,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\", \"filter\": \"\\\"organization_id\\\" = id\"}",
-        "id": 90,
+        "id": 93,
         "is_hidden": 1,
         "is_required": 0,
         "name": "manager_id",
@@ -1261,7 +1303,7 @@
     },
     {
         "description": null,
-        "id": 91,
+        "id": 94,
         "is_hidden": 1,
         "is_required": 0,
         "name": "description",
@@ -1275,7 +1317,7 @@
     },
     {
         "description": "主键",
-        "id": 92,
+        "id": 95,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1289,7 +1331,7 @@
     },
     {
         "description": null,
-        "id": 93,
+        "id": 96,
         "is_hidden": 1,
         "is_required": 1,
         "name": "login_name",
@@ -1303,7 +1345,7 @@
     },
     {
         "description": null,
-        "id": 94,
+        "id": 97,
         "is_hidden": 0,
         "is_required": 0,
         "name": "name",
@@ -1317,7 +1359,7 @@
     },
     {
         "description": null,
-        "id": 95,
+        "id": 98,
         "is_hidden": 1,
         "is_required": 0,
         "name": "sex",
@@ -1331,7 +1373,7 @@
     },
     {
         "description": null,
-        "id": 96,
+        "id": 99,
         "is_hidden": 1,
         "is_required": 0,
         "name": "birthday",
@@ -1345,7 +1387,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 97,
+        "id": 100,
         "is_hidden": 1,
         "is_required": 0,
         "name": "organization_id",
@@ -1359,7 +1401,7 @@
     },
     {
         "description": null,
-        "id": 98,
+        "id": 101,
         "is_hidden": 1,
         "is_required": 0,
         "name": "address",
@@ -1373,7 +1415,7 @@
     },
     {
         "description": null,
-        "id": 99,
+        "id": 102,
         "is_hidden": 1,
         "is_required": 0,
         "name": "telephone",
@@ -1387,7 +1429,7 @@
     },
     {
         "description": null,
-        "id": 100,
+        "id": 103,
         "is_hidden": 1,
         "is_required": 0,
         "name": "email",
@@ -1401,7 +1443,7 @@
     },
     {
         "description": null,
-        "id": 101,
+        "id": 104,
         "is_hidden": 1,
         "is_required": 0,
         "name": "website",
@@ -1415,7 +1457,7 @@
     },
     {
         "description": null,
-        "id": 102,
+        "id": 105,
         "is_hidden": 1,
         "is_required": 1,
         "name": "password",
@@ -1429,7 +1471,7 @@
     },
     {
         "description": null,
-        "id": 103,
+        "id": 106,
         "is_hidden": 0,
         "is_required": 0,
         "name": "role",
@@ -1443,7 +1485,7 @@
     },
     {
         "description": null,
-        "id": 104,
+        "id": 107,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -1457,7 +1499,7 @@
     },
     {
         "description": "主键",
-        "id": 105,
+        "id": 108,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1471,7 +1513,7 @@
     },
     {
         "description": null,
-        "id": 106,
+        "id": 109,
         "is_hidden": 1,
         "is_required": 0,
         "name": "time",
@@ -1485,7 +1527,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 107,
+        "id": 110,
         "is_hidden": 0,
         "is_required": 0,
         "name": "operator_id",
@@ -1499,7 +1541,7 @@
     },
     {
         "description": null,
-        "id": 108,
+        "id": 111,
         "is_hidden": 0,
         "is_required": 0,
         "name": "data_type",
@@ -1513,7 +1555,7 @@
     },
     {
         "description": null,
-        "id": 109,
+        "id": 112,
         "is_hidden": 0,
         "is_required": 0,
         "name": "data_item",
@@ -1527,7 +1569,7 @@
     },
     {
         "description": null,
-        "id": 110,
+        "id": 113,
         "is_hidden": 1,
         "is_required": 0,
         "name": "action",
@@ -1541,7 +1583,7 @@
     },
     {
         "description": null,
-        "id": 111,
+        "id": 114,
         "is_hidden": 1,
         "is_required": 0,
         "name": "abstract",
@@ -1555,7 +1597,7 @@
     },
     {
         "description": null,
-        "id": 112,
+        "id": 115,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -1569,7 +1611,7 @@
     },
     {
         "description": "主键",
-        "id": 113,
+        "id": 116,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1583,7 +1625,7 @@
     },
     {
         "description": null,
-        "id": 114,
+        "id": 117,
         "is_hidden": 1,
         "is_required": 0,
         "name": "template_id",
@@ -1597,7 +1639,7 @@
     },
     {
         "description": null,
-        "id": 115,
+        "id": 118,
         "is_hidden": 0,
         "is_required": 0,
         "name": "type",
@@ -1611,7 +1653,7 @@
     },
     {
         "description": null,
-        "id": 116,
+        "id": 119,
         "is_hidden": 0,
         "is_required": 0,
         "name": "name",
@@ -1625,7 +1667,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\", \"filter\": \"\\\"type\\\" = 1\"}",
-        "id": 117,
+        "id": 120,
         "is_hidden": 0,
         "is_required": 0,
         "name": "factory_id",
@@ -1639,7 +1681,7 @@
     },
     {
         "description": null,
-        "id": 118,
+        "id": 121,
         "is_hidden": 1,
         "is_required": 0,
         "name": "state",
@@ -1653,7 +1695,7 @@
     },
     {
         "description": null,
-        "id": 119,
+        "id": 122,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -1667,7 +1709,7 @@
     },
     {
         "description": "主键",
-        "id": 120,
+        "id": 123,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1681,7 +1723,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 121,
+        "id": 124,
         "is_hidden": 1,
         "is_required": 0,
         "name": "model_id",
@@ -1695,7 +1737,7 @@
     },
     {
         "description": null,
-        "id": 122,
+        "id": 125,
         "is_hidden": 0,
         "is_required": 0,
         "name": "no",
@@ -1709,7 +1751,7 @@
     },
     {
         "description": null,
-        "id": 123,
+        "id": 126,
         "is_hidden": 1,
         "is_required": 0,
         "name": "state",
@@ -1723,7 +1765,7 @@
     },
     {
         "description": null,
-        "id": 124,
+        "id": 127,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -1737,7 +1779,7 @@
     },
     {
         "description": "主键",
-        "id": 125,
+        "id": 128,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1751,7 +1793,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"no\"}",
-        "id": 126,
+        "id": 129,
         "is_hidden": 1,
         "is_required": 0,
         "name": "state_id",
@@ -1765,7 +1807,7 @@
     },
     {
         "description": null,
-        "id": 127,
+        "id": 130,
         "is_hidden": 0,
         "is_required": 0,
         "name": "no",
@@ -1779,7 +1821,7 @@
     },
     {
         "description": null,
-        "id": 128,
+        "id": 131,
         "is_hidden": 0,
         "is_required": 0,
         "name": "air_no_range",
@@ -1793,7 +1835,7 @@
     },
     {
         "description": null,
-        "id": 129,
+        "id": 132,
         "is_hidden": 0,
         "is_required": 0,
         "name": "engine_no_range",
@@ -1807,7 +1849,7 @@
     },
     {
         "description": null,
-        "id": 130,
+        "id": 133,
         "is_hidden": 1,
         "is_required": 0,
         "name": "state",
@@ -1821,7 +1863,7 @@
     },
     {
         "description": null,
-        "id": 131,
+        "id": 134,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -1835,7 +1877,7 @@
     },
     {
         "description": "主键",
-        "id": 132,
+        "id": 135,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -1849,7 +1891,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"no\"}",
-        "id": 133,
+        "id": 136,
         "is_hidden": 1,
         "is_required": 0,
         "name": "batch_id",
@@ -1863,7 +1905,7 @@
     },
     {
         "description": null,
-        "id": 134,
+        "id": 137,
         "is_hidden": 0,
         "is_required": 0,
         "name": "tag",
@@ -1877,7 +1919,7 @@
     },
     {
         "description": null,
-        "id": 135,
+        "id": 138,
         "is_hidden": 0,
         "is_required": 0,
         "name": "no",
@@ -1891,7 +1933,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\", \"filter\": \"\\\"type\\\" = 1\"}",
-        "id": 136,
+        "id": 139,
         "is_hidden": 0,
         "is_required": 0,
         "name": "factory_id",
@@ -1905,7 +1947,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\", \"filter\": \"\\\"type\\\" = 2\"}",
-        "id": 137,
+        "id": 140,
         "is_hidden": 1,
         "is_required": 0,
         "name": "user_id",
@@ -1919,7 +1961,7 @@
     },
     {
         "description": null,
-        "id": 138,
+        "id": 141,
         "is_hidden": 0,
         "is_required": 0,
         "name": "offer_time",
@@ -1933,7 +1975,7 @@
     },
     {
         "description": null,
-        "id": 139,
+        "id": 142,
         "is_hidden": 0,
         "is_required": 0,
         "name": "offer_no",
@@ -1947,7 +1989,7 @@
     },
     {
         "description": null,
-        "id": 140,
+        "id": 143,
         "is_hidden": 0,
         "is_required": 0,
         "name": "lifespan",
@@ -1961,7 +2003,7 @@
     },
     {
         "description": null,
-        "id": 141,
+        "id": 144,
         "is_hidden": 0,
         "is_required": 0,
         "name": "residue_span",
@@ -1975,7 +2017,7 @@
     },
     {
         "description": null,
-        "id": 142,
+        "id": 145,
         "is_hidden": 0,
         "is_required": 0,
         "name": "engine_model",
@@ -1989,7 +2031,7 @@
     },
     {
         "description": null,
-        "id": 143,
+        "id": 146,
         "is_hidden": 0,
         "is_required": 0,
         "name": "engine_no",
@@ -2003,7 +2045,7 @@
     },
     {
         "description": null,
-        "id": 144,
+        "id": 147,
         "is_hidden": 0,
         "is_required": 0,
         "name": "engine_lifespan",
@@ -2017,7 +2059,7 @@
     },
     {
         "description": null,
-        "id": 145,
+        "id": 148,
         "is_hidden": 0,
         "is_required": 0,
         "name": "engine_residue_span",
@@ -2031,7 +2073,7 @@
     },
     {
         "description": null,
-        "id": 146,
+        "id": 149,
         "is_hidden": 1,
         "is_required": 0,
         "name": "state",
@@ -2045,7 +2087,7 @@
     },
     {
         "description": null,
-        "id": 147,
+        "id": 150,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
@@ -2059,7 +2101,7 @@
     },
     {
         "description": "主键",
-        "id": 148,
+        "id": 151,
         "is_hidden": 1,
         "is_required": 1,
         "name": "id",
@@ -2073,7 +2115,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 149,
+        "id": 152,
         "is_hidden": 1,
         "is_required": 0,
         "name": "baseline_id",
@@ -2087,7 +2129,7 @@
     },
     {
         "description": null,
-        "id": 150,
+        "id": 153,
         "is_hidden": 0,
         "is_required": 0,
         "name": "name",
@@ -2101,7 +2143,7 @@
     },
     {
         "description": null,
-        "id": 151,
+        "id": 154,
         "is_hidden": 0,
         "is_required": 0,
         "name": "no",
@@ -2115,7 +2157,7 @@
     },
     {
         "description": null,
-        "id": 152,
+        "id": 155,
         "is_hidden": 0,
         "is_required": 0,
         "name": "object",
@@ -2129,7 +2171,7 @@
     },
     {
         "description": null,
-        "id": 153,
+        "id": 156,
         "is_hidden": 1,
         "is_required": 0,
         "name": "abstract",
@@ -2143,7 +2185,7 @@
     },
     {
         "description": null,
-        "id": 154,
+        "id": 157,
         "is_hidden": 0,
         "is_required": 0,
         "name": "operator",
@@ -2157,7 +2199,7 @@
     },
     {
         "description": null,
-        "id": 155,
+        "id": 158,
         "is_hidden": 0,
         "is_required": 0,
         "name": "time",
@@ -2171,7 +2213,7 @@
     },
     {
         "description": "{\"value\": \"id\", \"show\": \"name\"}",
-        "id": 156,
+        "id": 159,
         "is_hidden": 0,
         "is_required": 0,
         "name": "control_file_id",
@@ -2185,7 +2227,7 @@
     },
     {
         "description": null,
-        "id": 157,
+        "id": 160,
         "is_hidden": 0,
         "is_required": 0,
         "name": "description",
