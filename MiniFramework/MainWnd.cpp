@@ -587,7 +587,7 @@ void CMainWnd::OnWkeNetGetFavicon(CWkeWebkitUI* webView, const char* url, wkeMem
     if (ret) {
         std::string  strFileName = results[1];
         // std::string strdownPath = NFile::GetRootDirectoryA() + "favicon\\";
-        std::string strdownPath = utils::Texts::toNative(utils::Folders::GetCurrentPath()) + "favicon\\";
+        std::string strdownPath = utils::Texts::toNative(utils::Folders::GetCurrentPath()) + "\\favicon\\";
         // NFile::CreateDir(strdownPath.c_str());
         utils::Folders::MakeDir(utils::Texts::fromNative(strdownPath));
         strFileName = strdownPath + uri.GetHost() + strFileName;
