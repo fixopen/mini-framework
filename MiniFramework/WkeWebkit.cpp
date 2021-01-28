@@ -62,7 +62,7 @@ CWkeWebkitUI::~CWkeWebkitUI(void) {
             m_mapWke2UI.erase(iter);
         }
         //wkeSetHandle(m_pWebView, NULL);
-        //wkeDestroyWebView(m_pWebView);//销毁wkeWebView对应的所有数据结构，包括真实窗口等
+        //wkeDestroyWebView(m_pWebView); // 销毁wkeWebView对应的所有数据结构，包括真实窗口等
         m_pWebView = NULL;
     }
     m_pManager->RemoveMessageFilter(this);
@@ -89,7 +89,7 @@ void CWkeWebkitUI::DoInit() {
     wkeSetName(m_pWebView, utils::Texts::toNative(static_cast<const wchar_t*>(GetName())).c_str());
 
     // 初始化后回调接口
-    wkeSetTransparent(m_pWebView, false); //通知无窗口模式下，webview开启透明模式。
+    wkeSetTransparent(m_pWebView, false); // 通知无窗口模式下，webview开启透明模式。
 
     wkeOnTitleChanged(m_pWebView, OnWkeTitleChanged, this);
 
@@ -147,12 +147,12 @@ LRESULT CWkeWebkitUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bo
     if (current != this) {
         return FALSE;
     }
-    //修改鼠标指向时候的样式
+    // 修改鼠标指向时候的样式
     if (uMsg == WM_SETCURSOR) {
         bHandled = true;
         return S_OK;
     }
-    //修改输入法的位置
+    // 修改输入法的位置
     else if (uMsg == WM_IME_STARTCOMPOSITION) {
         const RECT controlPos = this->GetPos();
         wkeRect rect = wkeGetCaretRect(m_pWebView);
@@ -212,7 +212,7 @@ void CWkeWebkitUI::InitializeWebkit() {
         // 加载mb的资源
         CDuiString strResourcePath = CPaintManagerUI::GetInstancePath();
         CDuiString mbPath = strResourcePath + L"node.dll";
-        //CDuiString mbPath = strResourcePath + L"node_v8_4_8.dll";
+        // CDuiString mbPath = strResourcePath + L"node_v8_4_8.dll";
         if (!::PathFileExists(mbPath)) {
             ::MessageBoxW(NULL, L"请把node.dll放exe目录下", L"错误", MB_OK);
             return;
@@ -221,7 +221,7 @@ void CWkeWebkitUI::InitializeWebkit() {
 
         wkeInitialize();
 
-        //绑定全局函数
+        // 绑定全局函数
         jsBindFunction("jsToNative", JsToNative, 2);
         jsBindFunction("db_select", Select, 3);
         jsBindFunction("db_insert", Insert, 2);
@@ -398,10 +398,12 @@ void CWkeWebkitUI::DoEvent(TEventUI& event) {
         break;
     }
     case UIEVENT_TIMER:
-        /*	if (event.wParam == EVENT_TICK_TIEMER_ID)
-            {
-                Invalidate();
-            }*/
+        /*
+        if (event.wParam == EVENT_TICK_TIEMER_ID)
+        {
+            Invalidate();
+        }
+        */
         break;
     default: break;
     }
@@ -580,11 +582,11 @@ void readJsFile(const wchar_t* path, std::vector<char>* buffer) {
     b = b;
 }
 
-//任何网络请求发起前会触发此回调
-//注意：
-//1，此回调功能强大，在回调里，如果对job设置了wkeNetHookRequest，则表示mb会缓存获取到的网络数据，并在这次网络请求 结束后调用wkeOnLoadUrlEnd设置的回调，同时传递缓存的数据。在此期间，mb不会处理网络数据。
-//2，如果在wkeLoadUrlBeginCallback里没设置wkeNetHookRequest，则不会触发wkeOnLoadUrlEnd回调。
-//3，如果wkeLoadUrlBeginCallback回调里返回true，表示mb不处理此网络请求（既不会发送网络请求）。返回false，表示mb依然会发送网络请求。
+// 任何网络请求发起前会触发此回调
+// 注意：
+// 1，此回调功能强大，在回调里，如果对 job 设置了 wkeNetHookRequest，则表示 mb 会缓存获取到的网络数据，并在这次网络请求结束后调用 wkeOnLoadUrlEnd 设置的回调，同时传递缓存的数据。在此期间，mb 不会处理网络数据。
+// 2，如果在 wkeLoadUrlBeginCallback 里没设置 wkeNetHookRequest，则不会触发 wkeOnLoadUrlEnd 回调。
+// 3，如果 wkeLoadUrlBeginCallback 回调里返回 true，表示 mb 不处理此网络请求（既不会发送网络请求）。返回 false，表示 mb 依然会发送网络请求。
 bool  WKE_CALL_TYPE CWkeWebkitUI::onLoadUrlBegin(wkeWebView webView, void* param, const char* url, void* job) {
     const char kPreHead[] = "http://hook.test/";
     const char* pos = strstr(url, kPreHead);
@@ -618,7 +620,7 @@ void WKE_CALL_TYPE CWkeWebkitUI::OnWkeLoadingFinish(wkeWebView webView, void* pa
     CWkeWebkitUI* pWkeUI = (CWkeWebkitUI*) param;
     if (!pWkeUI || pWkeUI->m_released)	return;
 
-    //页面加载失败
+    // 页面加载失败
     if (result == WKE_LOADING_FAILED) {
         pWkeUI->Navigate(pWkeUI->m_chErrUrl);
     }
@@ -674,7 +676,7 @@ jsValue WKE_CALL_TYPE  CWkeWebkitUI::onMsg(jsExecState es, void* param) {
     msgOutput += "\n";
     OutputDebugStringA(msgOutput.c_str());
 
-    //查找UI对象
+    // 查找UI对象
     CWkeWebkitUI* pWkeUI = NULL;
     wkeWebView pWke = jsGetWebView(es);
     if (pWke) {
@@ -703,7 +705,7 @@ jsValue WKE_CALL_TYPE  CWkeWebkitUI::onMsg(jsExecState es, void* param) {
                 LPCTSTR lpArg1 = buf1;
 
                 if (wcscmp(lpArg1, L"refresh") == 0) {
-                    //本地刷新
+                    // 本地刷新
                     pWkeUI->Navigate(pWkeUI->m_chCurPageUrl);
                     return jsUndefined();
                 }
@@ -759,7 +761,7 @@ jsValue WKE_CALL_TYPE CWkeWebkitUI::onShellExec(jsExecState es, void* param) {
 }
 
 jsValue JS_CALL CWkeWebkitUI::JsToNative(jsExecState es) {
-    //查找UI对象
+    // 查找 UI 对象
     CWkeWebkitUI* pWkeUI = NULL;
     wkeWebView pWke = jsGetWebView(es);
     if (pWke) {
@@ -779,7 +781,7 @@ jsValue JS_CALL CWkeWebkitUI::JsToNative(jsExecState es) {
 
             return jsInt(int0 + int1);
             if (jsIsString(arg1) && jsIsString(arg2)) {
-                //需要保证两个参数都为字符串
+                // 需要保证两个参数都为字符串
 #ifdef _UNICODE 
                 wchar_t buf1[16 * 1024] = { 0 }, buf2[16 * 1024] = { 0 };
                 wcsncpy(buf1, jsToTempStringW(es, arg1), 16 * 1024 - 1);
@@ -794,7 +796,7 @@ jsValue JS_CALL CWkeWebkitUI::JsToNative(jsExecState es) {
                 LPCTSTR lpArg2 = buf2;
 
                 if (wcscmp(lpArg1, L"refresh") == 0) {
-                    //本地刷新
+                    // 本地刷新
                     pWkeUI->Navigate(pWkeUI->m_chCurPageUrl);
                     return jsUndefined();
                 }

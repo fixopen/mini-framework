@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+    </head>
+    <body>
+        <h1>test</h1>
+		<ul>
+			<li id="templates"></li>
+			<li id="types"></li>
+			<li id="unitTypes"></li>
+			<li id="units"></li>
+            <li id="supportConfigs"></li>
+			<li id="codes"></li>
+			<li id="schemas"></li>
+			<li id="lists"></li>
+		</ul>
+        <h1>file:///C:/Users/fixop/source/repos/productmanage/db-test.html</h1>
+        <h1>file:///C:/Users/qinym/source/repos/productmanage/db-test.html</h1>
+        <script type="application/ecmascript">
+            document.querySelector('h1').innerHTML = 'start'
+            // window.alert('start')
+            const templates = db_select('templates', '', '')
+			document.getElementById('templates').innerHTML = templates
+            const types = db_select('types', '', '')
+			document.getElementById('types').innerHTML = types
+			const unitTypes = db_select('unit_types', '', '')
+			document.getElementById('unitTypes').innerHTML = unitTypes
+			const units = db_select('units', '', '')
+			document.getElementById('units').innerHTML = units
+            const supportConfigs = db_select('info_configs', '', '')
+            document.getElementById('supportConfigs').innerHTML = supportConfigs
+            const codes = db_select('codes', '', '')
+			document.getElementById('codes').innerHTML = codes;
+            const schemas = db_select('schemas', '', '')
+			document.getElementById('schemas').innerHTML = schemas;
+            const lists = db_select('lists', '', '')
+			document.getElementById('lists').innerHTML = lists;
+            /*
+            const id = insert('tableName', {})
+            remove('table', id)
+            */
+            // document.querySelector('h1').innerHTML = JSON.stringify({templates: JSON.parse(templates), types: JSON.parse(types), codes: JSON.parse(codes), schemas: JSON.parse(schemas), lists: JSON.parse(lists), unitTypes: JSON.parse(unitTypes), units: JSON.parse(units) })
+            // const types = select(JSON.stringify({tableName: '类型', whereCause: '', orderBy: ''}))
+            // window.alert('end')
+        </script>
+    </body>
+</html>

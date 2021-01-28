@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "login_name": "admin",
+        "name": null,
+        "sex": 0,
+        "birthday": null,
+        "organization_id": 1,
+        "address": null,
+        "telephone": null,
+        "email": null,
+        "website": null,
+        "password": "admin123",
+        "role": "管理员",
+        "description": null
+    }
+]

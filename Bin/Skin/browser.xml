@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window>
+    <VerticalLayout name="root" bkimage="file='imgs/main/bg.jpg'" bkcolor="#FF006EDF">
+        <HorizontalLayout name="header" height="24" float="false" bkcolor="#FF006EDF" bkimage="imgs/titlebar.png">
+            <Container width="24" height="24" bkimage="imgs/logo.png"/>
+            <VerticalLayout inset="6,0,6,0">
+                <HorizontalLayout name="title_bar" height="24">
+                    <Label name="title" width="300" font="1" text="飞机交付技术状态管理系统" textcolor="#FFEFEFEF"/>
+                </HorizontalLayout>
+
+                <HorizontalLayout float="0,0,1,0" inset="0,-1,0,0" height="20">
+                    <Control/>
+                    <Button name="menubtn" visible="false" width="28" height="20" tooltip="菜单"
+                            normalimage="sysbtn_menu_normal" hotimage="sysbtn_menu_hot"
+                            pushedimage="sysbtn_menu_pushed"/>
+                    <Button name="skinbtn" visible="false" width="28" height="20" tooltip="模式切换 切换到EStart界面"
+                            normalimage="sysbtn_skin_normal" hotimage="sysbtn_skin_hot"
+                            pushedimage="sysbtn_skin_pushed"/>
+                    <Button name="minbtn" width="28" height="20" tooltip="最小化" normalimage="sysbtn_mini_normal"
+                            hotimage="sysbtn_mini_hot" pushedimage="sysbtn_mini_pushed"/>
+                    <Button name="maxbtn" width="28" height="20" tooltip="最大化" visible="false" normalimage="sysbtn_max_normal"
+                            hotimage="sysbtn_max_hot" pushedimage="sysbtn_max_pushed"/>
+                    <Button name="restorebtn" width="28" height="20" tooltip="还原"
+                            normalimage="sysbtn_restore_normal" hotimage="sysbtn_restore_hot"
+                            pushedimage="sysbtn_restore_pushed"/>
+                    <Button name="closebtn" width="39" height="20" tooltip="关闭" normalimage="sysbtn_close_normal"
+                            hotimage="sysbtn_close_hot" pushedimage="sysbtn_close_pushed"/>
+                </HorizontalLayout>
+            </VerticalLayout>
+        </HorizontalLayout>
+
+        <VerticalLayout name="body" bkcolor="#FFFFFFFF">
+            <TabLayout name="browser_tabbody"/>
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>
