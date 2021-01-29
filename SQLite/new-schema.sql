@@ -92,7 +92,7 @@ CREATE TABLE restrictions (
     id integer PRIMARY KEY,
     template_id integer REFERENCES templates (id),
     length integer,
-    format integer,
+    format text,
     precision integer,
     min real,
     max real
@@ -343,7 +343,7 @@ INSERT INTO schemas (id, template_id, parent_no, no, name, title, is_hidden, typ
 (NULL, NULL, 132, 0, 'id', 'id', 1, 4, 1, NULL, NULL, '主键'),
 (NULL, NULL, 132, 1, 'template_id', '模板id', 1, 66, 1, NULL, NULL, '{"value": "id", "show": "name"}'),
 (NULL, NULL, 132, 2, 'length', '长度', 0, 4, 0, NULL, NULL, NULL),
-(NULL, NULL, 132, 3, 'format', '格式', 0, 4, 0, NULL, NULL, NULL),
+(NULL, NULL, 132, 3, 'format', '格式', 0, 1, 0, NULL, NULL, NULL),
 (NULL, NULL, 132, 4, 'precision', '精度', 0, 4, 0, NULL, NULL, NULL),
 (NULL, NULL, 132, 5, 'min', '最小值', 0, 5, 0, NULL, NULL, NULL),
 (NULL, NULL, 132, 6, 'max', '最大值', 1, 5, 0, NULL, NULL, NULL),
