@@ -235,6 +235,7 @@ void CWkeWebkitUI::InitializeWebkit() {
         jsBindFunction("db_exportPackage", ExportPackage, 2);
         jsBindFunction("db_exportTemplatePackage", ExportTemplatePackage, 1);
         jsBindFunction("db_exportOrganizationsPackage", ExportOrganizationsPackage, 0);
+        jsBindFunction("db_exportUnitsPackage", ExportUnitsPackage, 0);
         jsBindFunction("db_openfile", OpenFile, 1);
         jsBindFunction("db_executeSql", ExecuteSql, 1);
         jsBindFunction("db_buildInstall", BuildInstall, 1);
@@ -1374,7 +1375,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                 //+ L", \"lifespans\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"有寿件"), lifespans)
                 //+ L", \"doubleCurrents\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"双流水"), doubleCurrents)
                 //+ L", \"problems\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"交付遗留问题及处置情况"), problems)
-                + (air.empty() ? L"" : L", \"air\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"飞机"), air))
+                + (air.empty() ? L"" : L", \"air\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"airs"), air))
                 + L"}";
             std::wstring rootPath = utils::Folders::GetCurrentPath() + L"\\export";
             std::wstring destPath = rootPath + L"\\working";
@@ -1387,6 +1388,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
             
             // batch[5] // 布局
             // 布局\\图片\\name.ext ...
+            /*
             if (batch[5].has_value()) {
                 std::wstring layout = batch[5].value();
                 nlohmann::json data = nlohmann::basic_json<>::parse(utils::Texts::toUtf8(layout));
@@ -1403,6 +1405,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                     }
                 }
             }
+            */
             /*
             // batch[8] // 喷涂方案
             if (batch[8].has_value()) {
@@ -1440,7 +1443,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
                 break;
             case 1:
                 // \\export\\单机包-modelNo-stateNo-batchNo-airNo.zip
-                zipFilename = L"\\单机包-" + model[3].value() + L"-" + state[2].value() + L"-" + batch[2].value() + L"-" + air[2].value() + L".zip";
+                zipFilename = L"\\单机包-" + model[3].value() + L"-" + state[2].value() + L"-" + batch[2].value() + L"-" + air[3].value() + L".zip";
                 break;
             }
             utils::zip::ZipViaZlib(rootPath + zipFilename + L".plain", destPath);
@@ -1537,6 +1540,34 @@ jsValue JS_CALL CWkeWebkitUI::ExportOrganizationsPackage(jsExecState es) {
         }
         // \\export\\template-templateId.json
         std::wstring fileName = destPath + L"\\organizations.json";
+        utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
+        result = jsInt(0);
+    }
+    return result;
+}
+
+jsValue JS_CALL CWkeWebkitUI::ExportUnitsPackage(jsExecState es) {
+    jsValue result = jsUndefined();
+    int argCount = jsArgCount(es);
+    if (argCount == 0) {
+        auto unitTypes = utils::SqlData::ExecuteQueryTable(L"SELECT "
+            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"unit_types"))
+            + L" FROM \"unit_types\"");
+
+        auto units = utils::SqlData::ExecuteQueryTable(L"SELECT "
+            + utils::SqlData::constructColumnList(utils::SqlData::getColumns(L"units"))
+            + L" FROM \"units\"");
+
+        std::wstring r = L"{\"unitTypes\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"unit_types"), unitTypes)
+            + L", \"units\": " + utils::SqlData::toJson(utils::SqlData::getColumns(L"units"), units)
+            + L"}";
+
+        std::wstring destPath = utils::Folders::GetCurrentPath() + L"\\export";
+        if (!utils::Folders::IsDirectoryExist(destPath)) {
+            utils::Folders::MakeDir(destPath);
+        }
+        // \\export\\template-templateId.json
+        std::wstring fileName = destPath + L"\\units.json";
         utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
         result = jsInt(0);
     }

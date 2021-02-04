@@ -277,6 +277,7 @@ private:
     static jsValue JS_CALL ExportPackage(jsExecState es);
     static jsValue JS_CALL ExportTemplatePackage(jsExecState es);
     static jsValue JS_CALL ExportOrganizationsPackage(jsExecState es);
+    static jsValue JS_CALL ExportUnitsPackage(jsExecState es);
     static jsValue JS_CALL OpenFile(jsExecState es);
     static jsValue JS_CALL ExecuteSql(jsExecState es);
     static jsValue JS_CALL BuildInstall(jsExecState es);
