@@ -1643,12 +1643,12 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
                 utils::Folders::DeleteDir(workPath);
                 utils::Folders::MakeDir(binPath);
                 utils::Folders::FileCopy(currentPath + L"\\air.db", binPath + L"\\air.db");
-                utils::Folders::FileCopy(currentPath + L"\\DuiLib.dll", binPath + L"\\DuiLib.dll");
-                utils::Folders::FileCopy(currentPath + L"\\libcrypto-1_1.dll", binPath + L"\\libcrypto-1_1.dll");
-                utils::Folders::FileCopy(currentPath + L"\\libcurl.dll", binPath + L"\\libcurl.dll");
-                utils::Folders::FileCopy(currentPath + L"\\libssl-1_1.dll", binPath + L"\\libssl-1_1.dll");
-                utils::Folders::FileCopy(currentPath + L"\\MiniBlinkBrowser.exe", binPath + L"\\MiniBlinkBrowser.exe");
-                utils::Folders::FileCopy(currentPath + L"\\msvcr110.dll", binPath + L"\\msvcr110.dll");
+                //utils::Folders::FileCopy(currentPath + L"\\DuiLib.dll", binPath + L"\\DuiLib.dll");
+                //utils::Folders::FileCopy(currentPath + L"\\libcrypto-1_1.dll", binPath + L"\\libcrypto-1_1.dll");
+                //utils::Folders::FileCopy(currentPath + L"\\libcurl.dll", binPath + L"\\libcurl.dll");
+                //utils::Folders::FileCopy(currentPath + L"\\libssl-1_1.dll", binPath + L"\\libssl-1_1.dll");
+                //utils::Folders::FileCopy(currentPath + L"\\MiniBlinkBrowser.exe", binPath + L"\\MiniBlinkBrowser.exe");
+                //utils::Folders::FileCopy(currentPath + L"\\msvcr110.dll", binPath + L"\\msvcr110.dll");
                 utils::Folders::FileCopy(currentPath + L"\\node.dll", binPath + L"\\node.dll");
                 utils::Folders::FileCopy(currentPath + L"\\AirPlaneSetup.exe", binPath + L"\\AirPlaneSetup.exe");
                 utils::Folders::FileCopy(currentPath + L"\\AirUninstall.exe", binPath + L"\\AirUninstall.exe");
