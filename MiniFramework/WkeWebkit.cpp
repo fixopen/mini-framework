@@ -1618,7 +1618,7 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
             if (organizations.size() == 1) {
                 std::wstring type = L"admin.bin";
                 std::vector<std::optional<std::wstring>> organization = organizations[0];
-                switch (std::stoi(organization[3].value())) {
+                switch (std::stoi(organization[4].value())) {
                 case 0:
                     type = L"admin.bin";
                     break;
