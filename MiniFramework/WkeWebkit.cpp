@@ -1112,10 +1112,10 @@ jsValue JS_CALL CWkeWebkitUI::ImportPackage(jsExecState es) {
                 int idValue = jsToInt(es, id);
                 nlohmann::json data = nlohmann::basic_json<>::parse(utils::Folders::ReadFile(workPath + L"\\meta.json"));
                 if (data.contains("air")) {
-                    data["air"][u8"batch_id"] = idValue;
+                    data["air"][u8"use_organization_id"] = idValue;
                     data["air"]["state"] = 0;
                     data["air"].erase("id");
-                    int64_t airId = utils::SqlData::insert(L"·É»ú", data["air"]);
+                    int64_t airId = utils::SqlData::insert(L"airs", data["air"]);
                     data["baseline"][u8"object_id"] = airId;
                     data["baseline"].erase("id");
                     int64_t baselineId = utils::SqlData::insert(L"baselines", data["baseline"]);
