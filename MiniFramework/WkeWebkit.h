@@ -282,6 +282,7 @@ private:
     static jsValue JS_CALL ExecuteSql(jsExecState es);
     static jsValue JS_CALL BuildInstall(jsExecState es);
     static jsValue JS_CALL WriteExcel(jsExecState es);
+    static jsValue JS_CALL GetRoot(jsExecState es);
 
     static jsValue WKE_CALL_TYPE onMsg(jsExecState es, void* param);
 

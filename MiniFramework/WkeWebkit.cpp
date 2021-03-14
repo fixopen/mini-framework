@@ -240,6 +240,7 @@ void CWkeWebkitUI::InitializeWebkit() {
         jsBindFunction("db_executeSql", ExecuteSql, 1);
         jsBindFunction("db_buildInstall", BuildInstall, 1);
         jsBindFunction("db_writeExcel", WriteExcel, 3);
+        jsBindFunction("db_getRoot", GetRoot, 0);
 
         wkeJsBindFunction("eMsg", &onMsg, nullptr, 5);
         wkeJsBindFunction("eShellExec", &onShellExec, nullptr, 3);
@@ -1452,6 +1453,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
             utils::Folders::FileDelete(rootPath + zipFilename + L".plain");
             // utils::Folders::FileCopy(destPath + zipFilename, rootPath + zipFilename);
             utils::Folders::DeleteDir(destPath);
+            result = jsStringW(es, (rootPath + zipFilename).c_str());
         }
     }
     return result;
@@ -1512,7 +1514,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportTemplatePackage(jsExecState es) {
             // \\export\\template-templateId.json
             std::wstring fileName = destPath + L"\\template-" + std::to_wstring(idValue) + L".json";
             utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-            result = jsInt(0);
+            result = jsStringW(es, fileName.c_str());
+            // result = jsInt(0);
         }
     }
     return result;
@@ -1541,7 +1544,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportOrganizationsPackage(jsExecState es) {
         // \\export\\template-templateId.json
         std::wstring fileName = destPath + L"\\organizations.json";
         utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-        result = jsInt(0);
+        // result = jsInt(0);
+        result = jsStringW(es, fileName.c_str());
     }
     return result;
 }
@@ -1569,7 +1573,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportUnitsPackage(jsExecState es) {
         // \\export\\template-templateId.json
         std::wstring fileName = destPath + L"\\units.json";
         utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-        result = jsInt(0);
+        // result = jsInt(0);
+        result = jsStringW(es, fileName.c_str());
     }
     return result;
 }
@@ -1649,6 +1654,7 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
                 //utils::Folders::FileCopy(currentPath + L"\\libssl-1_1.dll", binPath + L"\\libssl-1_1.dll");
                 //utils::Folders::FileCopy(currentPath + L"\\MiniBlinkBrowser.exe", binPath + L"\\MiniBlinkBrowser.exe");
                 //utils::Folders::FileCopy(currentPath + L"\\msvcr110.dll", binPath + L"\\msvcr110.dll");
+                utils::Folders::FileCopy(currentPath + L"\\MiniFramework.exe", binPath + L"\\MiniFramework.exe");
                 utils::Folders::FileCopy(currentPath + L"\\node.dll", binPath + L"\\node.dll");
                 utils::Folders::FileCopy(currentPath + L"\\AirPlaneSetup.exe", binPath + L"\\AirPlaneSetup.exe");
                 utils::Folders::FileCopy(currentPath + L"\\AirUninstall.exe", binPath + L"\\AirUninstall.exe");
@@ -1679,6 +1685,7 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
                 // utils::Log::log(command);
                 system(utils::Texts::toNative(command).c_str());
                 // ¼ÆËã»ú\HKEY_CURRENT_USER\SOFTWARE\AirPlaneAdmin
+                result = jsStringW(es, (destPath + L"\\AirPlaneSetup.exe").c_str());
             }
             /*
             SetCurrentDirectory("c:\\docs\\stuff");
@@ -1738,10 +1745,16 @@ jsValue JS_CALL CWkeWebkitUI::WriteExcel(jsExecState es) {
             std::wstring json = jsToTempStringW(es, dataJson);
             auto fn = reallyWriteExcel(fileName, sheetname, json);
             utils::Process::OpenUserFile(fn);
-            result = jsNull();
+            // result = jsNull();
+            result = jsStringW(es, fn.c_str());
         }
     }
     return result;
+}
+
+jsValue JS_CALL CWkeWebkitUI::GetRoot(jsExecState es) {
+    auto fn = utils::Folders::GetCurrentPath();
+    return jsStringW(es, fn.c_str());
 }
 
 /*
