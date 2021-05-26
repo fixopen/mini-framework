@@ -240,6 +240,7 @@ void CWkeWebkitUI::InitializeWebkit() {
         jsBindFunction("db_executeSql", ExecuteSql, 1);
         jsBindFunction("db_buildInstall", BuildInstall, 1);
         jsBindFunction("db_writeExcel", WriteExcel, 3);
+        jsBindFunction("db_getRoot", GetRoot, 0);
 
         wkeJsBindFunction("eMsg", &onMsg, nullptr, 5);
         wkeJsBindFunction("eShellExec", &onShellExec, nullptr, 3);
@@ -1649,6 +1650,7 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
                 //utils::Folders::FileCopy(currentPath + L"\\libssl-1_1.dll", binPath + L"\\libssl-1_1.dll");
                 //utils::Folders::FileCopy(currentPath + L"\\MiniBlinkBrowser.exe", binPath + L"\\MiniBlinkBrowser.exe");
                 //utils::Folders::FileCopy(currentPath + L"\\msvcr110.dll", binPath + L"\\msvcr110.dll");
+                utils::Folders::FileCopy(currentPath + L"\\MiniFramework.exe", binPath + L"\\MiniFramework.exe");
                 utils::Folders::FileCopy(currentPath + L"\\node.dll", binPath + L"\\node.dll");
                 utils::Folders::FileCopy(currentPath + L"\\AirPlaneSetup.exe", binPath + L"\\AirPlaneSetup.exe");
                 utils::Folders::FileCopy(currentPath + L"\\AirUninstall.exe", binPath + L"\\AirUninstall.exe");
@@ -1742,6 +1744,11 @@ jsValue JS_CALL CWkeWebkitUI::WriteExcel(jsExecState es) {
         }
     }
     return result;
+}
+
+jsValue JS_CALL CWkeWebkitUI::GetRoot(jsExecState es) {
+    auto path = utils::Folders::GetCurrentPath();
+    return jsStringW(es, path.c_str());
 }
 
 /*
