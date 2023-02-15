@@ -1113,10 +1113,10 @@ jsValue JS_CALL CWkeWebkitUI::ImportPackage(jsExecState es) {
                 int idValue = jsToInt(es, id);
                 nlohmann::json data = nlohmann::basic_json<>::parse(utils::Folders::ReadFile(workPath + L"\\meta.json"));
                 if (data.contains("air")) {
-                    data["air"][u8"batch_id"] = idValue;
+                    data["air"][u8"use_organization_id"] = idValue;
                     data["air"]["state"] = 0;
                     data["air"].erase("id");
-                    int64_t airId = utils::SqlData::insert(L"·É»ú", data["air"]);
+                    int64_t airId = utils::SqlData::insert(L"airs", data["air"]);
                     data["baseline"][u8"object_id"] = airId;
                     data["baseline"].erase("id");
                     int64_t baselineId = utils::SqlData::insert(L"baselines", data["baseline"]);
@@ -1453,6 +1453,7 @@ jsValue JS_CALL CWkeWebkitUI::ExportPackage(jsExecState es) {
             utils::Folders::FileDelete(rootPath + zipFilename + L".plain");
             // utils::Folders::FileCopy(destPath + zipFilename, rootPath + zipFilename);
             utils::Folders::DeleteDir(destPath);
+            result = jsStringW(es, (rootPath + zipFilename).c_str());
         }
     }
     return result;
@@ -1513,7 +1514,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportTemplatePackage(jsExecState es) {
             // \\export\\template-templateId.json
             std::wstring fileName = destPath + L"\\template-" + std::to_wstring(idValue) + L".json";
             utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-            result = jsInt(0);
+            result = jsStringW(es, fileName.c_str());
+            // result = jsInt(0);
         }
     }
     return result;
@@ -1542,7 +1544,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportOrganizationsPackage(jsExecState es) {
         // \\export\\template-templateId.json
         std::wstring fileName = destPath + L"\\organizations.json";
         utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-        result = jsInt(0);
+        // result = jsInt(0);
+        result = jsStringW(es, fileName.c_str());
     }
     return result;
 }
@@ -1570,7 +1573,8 @@ jsValue JS_CALL CWkeWebkitUI::ExportUnitsPackage(jsExecState es) {
         // \\export\\template-templateId.json
         std::wstring fileName = destPath + L"\\units.json";
         utils::Folders::WriteFile(fileName, utils::Texts::toUtf8(r));
-        result = jsInt(0);
+        // result = jsInt(0);
+        result = jsStringW(es, fileName.c_str());
     }
     return result;
 }
@@ -1681,6 +1685,7 @@ jsValue JS_CALL CWkeWebkitUI::BuildInstall(jsExecState es) {
                 // utils::Log::log(command);
                 system(utils::Texts::toNative(command).c_str());
                 // ¼ÆËã»ú\HKEY_CURRENT_USER\SOFTWARE\AirPlaneAdmin
+                result = jsStringW(es, (destPath + L"\\AirPlaneSetup.exe").c_str());
             }
             /*
             SetCurrentDirectory("c:\\docs\\stuff");
@@ -1740,7 +1745,8 @@ jsValue JS_CALL CWkeWebkitUI::WriteExcel(jsExecState es) {
             std::wstring json = jsToTempStringW(es, dataJson);
             auto fn = reallyWriteExcel(fileName, sheetname, json);
             utils::Process::OpenUserFile(fn);
-            result = jsNull();
+            // result = jsNull();
+            result = jsStringW(es, fn.c_str());
         }
     }
     return result;
